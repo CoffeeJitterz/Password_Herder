@@ -35,13 +35,26 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+// const usersRoutes = require("./routes/users");
+//const widgetsRoutes = require("./routes/widgets");
+const indexRoutes = require("./routes/index");
+const newRoutes = require("./routes/new");
+const loginRoutes = require("./routes/login");
+const registerRoutes = require("./routes/register");
+const editRoutes = require("./routes/edit");
+const deleteRoutes = require("./routes/delete");
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+//app.use("/api/users", usersRoutes(db));
+//app.use("/api/widgets", widgetsRoutes(db));
+app.use("/", indexRoutes (db));
+app.use("/new", newRoutes(db));
+app.use("/login", loginRoutes(db));
+app.use("/register", registerRoutes(db));
+app.use("/edit", editRoutes(db));
+app.use("/delete", deleteRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
