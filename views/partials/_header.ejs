@@ -15,12 +15,21 @@
       <a class="nav-item nav-link" href="/new">Create New</a>
     </div>
 
+    <!-- login form -->
+    <% if (!email) { %>
+      <div class="navbar-nav d-flex justify-content-end">
+        <a class="nav-item nav-link" href="/login">Login</a>
+        <a class="nav-item nav-link" href="/register">Register</a>
+      </div>
+    <!-- logout form -->
+    <% } else { %>
+      <form class = "form-inline" action ="/login/logout", method = "POST">
+      <p> welcome: <%= email %> </p>
+      <button class="nav-item nav-link" type="submit">Logout</button>
+      </form>
+    <% }%>
 
 
-        <div class="navbar-nav d-flex justify-content-end">
-          <a class="nav-item nav-link" href="/login">Login</a>
-          <a class="nav-item nav-link" href="/register">Register</a>
-        </div>
 
       </nav>
-    </header>
+

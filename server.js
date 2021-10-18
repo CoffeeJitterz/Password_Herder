@@ -7,11 +7,13 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cookieSession = require("cookie-session");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
+
 db.connect();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -32,6 +34,13 @@ app.use(
 );
 
 app.use(express.static("public"));
+
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["Some way to encrypt the values", "$!~`yEs123bla!!%"],
+  })
+);
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
