@@ -39,15 +39,15 @@
       <tr>
         <td><%= passwords[i].name %></td>
         <td><%= passwords[i].website_username %></td>
-        <td id="copy_password"><%= passwords[i].website_password %></td>
-        <td><button id="copy">COPY</button></td>
+        <td><%= passwords[i].website_password %></td>
+    <form action="/" method="POST"><td><button  id="copy">COPY</button></td></form>
         <td><button>EDIT</button></td>
         <td><button>DELETE</button></td>
       </tr>
     </tbody>
     <% } %>
     <tfoot >
-      <td>CREATE<button type="button" action="/new" method="PUT">NEW</button></td>
+      <form action="/new" method="GET"><td>CREATE<button type="submit">NEW</button></td></form>
     </tfoot>
   </table>
 </body>

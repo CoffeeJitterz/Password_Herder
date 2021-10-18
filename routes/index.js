@@ -5,8 +5,10 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT websites.name, website_username, website_password
               FROM passwords
-              JOIN websites ON websites.id = website_id;`)
+              JOIN websites ON websites.id = website_id;
+              `)
     .then(data => {
+      //console.log(data)
       const passwords = data.rows;
       const templateVars = {passwords};
       res.render("index", templateVars);
@@ -16,6 +18,10 @@ module.exports = (db) => {
       .status(500)
       .json({ error: err.message });
     });
+  });
+
+  router.post("/", (req, res) => {
+    //console.log(req.body)
   });
 
 
