@@ -15,7 +15,31 @@
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+  <table class="table table-dark table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Website</th>
+        <th scope="col">Username</th>
+        <th scope="col">Password</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+
+    </thead>
+    <% for(let i = 0; i < passwords.length; i++) { %>
+    <tbody id="passwords_container">
+      <tr>
+        <td><%= passwords[i].name %></td>
+        <td><%= passwords[i].website_username %></td>
+        <td><%= passwords[i].website_password %></td>
+        <td><button>COPY</button></td>
+        <td><button>EDIT</button></td>
+        <td><button>DELETE</button></td>
+      </tr>
+    </tbody>
+    <% } %>
+  </table>
 </body>
 
 </html>
