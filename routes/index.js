@@ -8,7 +8,7 @@ module.exports = (db) => {
               JOIN websites ON websites.id = website_id;
               `)
     .then(data => {
-      //console.log(data)
+      console.log(data.rows)
       const passwords = data.rows;
       const templateVars = {passwords};
       res.render("index", templateVars);
