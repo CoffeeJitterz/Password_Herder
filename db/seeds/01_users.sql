@@ -3,10 +3,10 @@
 -- INSERT INTO users (name) VALUES ('Kira');
 
 --users
-INSERT INTO users (id, email, user_password) VALUES (1, 'one@gmail.com', 'password');
-INSERT INTO users (id, email, user_password) VALUES (2, 'two@gmail.com', 'password');
-INSERT INTO users (id, email, user_password) VALUES (3, 'three@gmail.com', 'password');
-INSERT INTO users (id, email, user_password) VALUES (4, 'four@gmail.com', 'password');
+INSERT INTO users (id, email, user_password) VALUES (1, 'one@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+INSERT INTO users (id, email, user_password) VALUES (2, 'two@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+INSERT INTO users (id, email, user_password) VALUES (3, 'three@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
+INSERT INTO users (id, email, user_password) VALUES (4, 'four@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 -- organizations
 INSERT INTO organizations (id, name) VALUES (1,'cool');
