@@ -6,7 +6,8 @@ module.exports = (db) => {
       res.render("new");
   });
   router.post("/", (req, res) => {
-    req.render("new");
+    res.render("new");
   });
   return router;
 };
+
