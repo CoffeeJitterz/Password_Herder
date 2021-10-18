@@ -10,10 +10,12 @@ const pool = new Pool ({
   database: 'midterm'
 })
 
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    // console.log("this is getting");
-    res.render("login");
+
+    const templateVars = {email: req.session.email};
+    res.render("login", templateVars);
   });
 
   const getUserWithEmail = function (email) {
@@ -48,7 +50,7 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     // console.log("This is posting");
-    console.log(req.body);
+
     const{email, password} = req.body;
 
     login(email, password)
@@ -60,8 +62,9 @@ module.exports = (db) => {
         // res.send({error: "error"});
         return;
       }
-      req.session = { userId: user.id };
-      console.log("req.session.userID: ", req.session);
+      req.session.email = user.email; // create an id key with the value of user.id === 1
+
+      // console.log("req.session.userID: ", req.session);
       // res.send({user: {email: user.email, id: user.id}});
       res.redirect('/');
     })

@@ -10,7 +10,7 @@ module.exports = (db) => {
     .then(data => {
       //console.log(data)
       const passwords = data.rows;
-      const templateVars = {passwords};
+      const templateVars = {passwords, email: req.session.email};
       res.render("index", templateVars);
     })
     .catch(err => {
