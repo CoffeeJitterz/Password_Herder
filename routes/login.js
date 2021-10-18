@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
+const cookieSession = require('cookie-session');
 
 const {Pool} = require('pg');
 const pool = new Pool ({
@@ -37,7 +38,7 @@ module.exports = (db) => {
     console.log("getting login");
     return getUserWithEmail(email)
     .then(user =>{
-      // if ("password" === user.user_password)
+       //if ("password" === user.user_password)
       if (bcrypt.compareSync(password, user.user_password))
       {
         console.log("line 38: ", user);
@@ -56,7 +57,7 @@ module.exports = (db) => {
     login(email, password)
     // console.log("line 52")
     .then (user => {
-      // console.log("!!!!!!!!!!!!!!!", user);
+       //console.log("!!!!!!!!!!!!!!!", user);
       if(!user) {
         res.status(403).send("please check your username and password again. :) ");
         // res.send({error: "error"});
