@@ -21,39 +21,95 @@
 </head>
 
 <body>
-  <h3>PassWord Generator </h3>
-  <div class="container">
-    <p id="passwordBox"></p>
-    <i class="far fa-clipboard" onclick="copyPassword()"></i>
-  </div>
-  <div>
-    <label for="length">Password Length</label>
-    <input type="number" id="pwdlength" min="8" max="15" value="8">
-  </div>
-  <div>
-    <label for="lowerCase">Include Lowercase</label>
-    <input type="checkbox" name="lowerCase" id="lowerCase">
-  </div>
-  <div>
-    <label for="upperCase"> Include Uppercase</label>
-    <input type="checkbox" name="upperCase" id="upperCase">
-  </div>
-  <div>
-    <label>Include Numbers</label>
-    <input type="checkbox" name="number" id="number">
-  </div>
-  <div>
-    <label>Include Symbols</label>
-    <input type="checkbox" name="symbols" id="symbols">
-  </div>
-  <span class="empty">Please select at least one of the options!!</span>
-  <button onclick="generatePassword()" class="btn btn-primary">Generate Password</button>
+  <%- include('partials/_header') %>
+
+              <h3>PassWord Generator </h3>
+              <div class="container">
+                <p id="passwordBox"></p>
+                <i class="far fa-clipboard" onclick="copyPassword()"></i>
+              </div>
+              <div>
+                <label for="length">Password Length</label>
+                <input type="number" id="pwdlength" min="8" max="15" value="8">
+              </div>
+              <div>
+                <label for="lowerCase">Include Lowercase</label>
+                <input type="checkbox" name="lowerCase" id="lowerCase">
+              </div>
+              <div>
+                <label for="upperCase"> Include Uppercase</label>
+                <input type="checkbox" name="upperCase" id="upperCase">
+              </div>
+              <div>
+                <label>Include Numbers</label>
+                <input type="checkbox" name="number" id="number">
+              </div>
+              <div>
+                <label>Include Symbols</label>
+                <input type="checkbox" name="symbols" id="symbols">
+              </div>
+              <span class="empty">Please select at least one of the options!!</span>
+  <!-- <form action ='/new' method ='POST'>
+              <button onclick="generatePassword()" class="btn btn-primary">Generate Password</button>
+
+              <div class="passwordBox">Your Password:</div>
+              <div>
+                <textarea name="text" id="pass-text"></textarea>
+                <button id="copy" onclick="copy()">Copy</button>
+              </div>
+
+              <div>
+                <label for="website_category">Website Category</label>
+                <input name="website_category" type="text" id="website_category" placeholder="website category">
+              </div>
+
+              <div>
+                <label for="website_name">Website Name</label>
+                <input name="website_name" type="text" id="website_name"  placeholder="website name">
+              </div>
+
+              <div>
+                <label for="website_username">Website UserName</label>
+                <input name="website_username" type="text" id="website_username" placeholder="website username">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Save</button>
+  </form> -->
+
+
+
+  <!-- /// smiti  -->
+  <form method="POST" action="/">
+    <div>
+      <label for="website_name">Website</label>
+      <input type="text" name="website_name" id="website_name">
+    </div>
+    <div>
+      <label for="website_category">Website Category</label>
+      <select name="website_category" id="website_category">
+        <option disabled selected value> -- select a category -- </option>
+        <option value="social">Social</option>
+        <option value="job">Job</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="educational">Educational</option>
+        <option value="work">Work</option>
+        <option value="hobby">Hobby</option>
+      </select>
+    </div>
+    <div>
+      <label for="website_username">User Name</label>
+      <input type="text" name="website_username" id="website_username">
+    </div>
   <button type="submit" class="btn btn-primary">Save</button>
   <div class="passwordBox">Your Password:</div>
   <div>
     <textarea name="text" id="pass-text"></textarea>
     <button id="copy" onclick="copy()">Copy</button>
   </div>
+</form>
+
+
+
 </body>
 
 </html>
