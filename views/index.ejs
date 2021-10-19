@@ -40,9 +40,9 @@
         <td><%= passwords[i].name %></td>
         <td><%= passwords[i].website_username %></td>
         <td><%= passwords[i].website_password %></td>
-    <form action="<%=passwords[i].id%>/copy" method="get"><td><button  id="copy">COPY</button></td></form>
-    <form action="<%=passwords[i].id%>/edit" method="POST"><td><button  id="edit">EDIT</button></td></form>
-    <form action="<%=passwords[i].id%>/delete" method="POST"><td><button  id="edit">DELETE</button></td></form>
+    <form action="/" method="POST"><td><button  id="copy">COPY</button></td></form>
+        <td><button>EDIT</button></td>
+        <td><button>DELETE</button></td>
       </tr>
     </tbody>
     <% } %>

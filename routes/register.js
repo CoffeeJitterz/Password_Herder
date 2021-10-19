@@ -21,34 +21,26 @@ module.exports = (db) => {
 
     console.log("add one user");
 
-    const salt = bcrypt.genSaltSync(10);
-
-    const hashPW = function(userPW) {
-      return bcrypt.hashSync(userPW, salt);
-    };
-
-    const conditions = [
-      // check if the organization already exist.
-      pool.query(`SELECT * FROM organizations WHERE name = $1;`, [org]),
-      // check if the email already exist.
-      pool.query(`SELECT * FROM users WHERE email = $1;`, [em])
-    ];
-
-    return Promise.all(conditions)
-    .then((results) =>{
-      if(results[0].rows.length === 1  && results[1].rows.length === 0) {
-        return pool
-        // insert the new user information.
-        .query (`INSERT INTO users (email, user_password) VALUES ($1, $2) RETURNING *`, [em, hashPW(pw)])
-        .then( (user) => {
-          console.log("this is user: ", user)
-          if(!user) {
-            console.log('error!');
-            return;
-          }
-          return user;
-        })
+    return pool
+    .query(`SELECT * from organizations where name = $1;`, [org])
+    .then((result) => {
+      console.log(result);
+      if (result.rows.length === 0) {
+        console.log("wrong org!");
+        return;
       }
+      return pool
+      .query (`INSERT INTO users (email, user_password) VALUES ($2, $3) RETURNING *`, [em, bcrypt.hashSync(pw)])
+      .then( (user) => {
+        if(!user) {
+          console.log('error!');
+          return;
+        }
+        return user ;
+      })
+    })
+    .catch((err) => {
+      return "line 44 error!";
     })
   }
 
@@ -56,8 +48,8 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const info = req.body;
-    // console.log("This is posting");
-    // console.log("req.body: ", req.body);
+    console.log("This is posting");
+    console.log("req.body: ", req.body);
 
     addUser(info.organization_name, info.email, info.password)
     .then((result) => {
