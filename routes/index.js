@@ -2,7 +2,23 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+      // router.get("/", (req, res) => {
+      //   const queries = [
+      //     db.query(`SELECT passwords.id, websites.name as website, website_username, website_password
+      //              FROM passwords
+      //              JOIN websites ON websites.id = website_id`),
 
+      //     db.query(`
+      //               SELECT catagory
+      //               FROM websites
+      //               GROUP BY catagory`),
+      //     db.query(`
+      //               SELECT name
+      //               FROM organizations
+      //               `),
+      //   ];
+      //  return P
+      // });
   router.get("/", (req, res) => {
     //console.log(req.body)
     db.query(`SELECT passwords.id, websites.name as website, website_username, website_password, category, organizations.name as organization
