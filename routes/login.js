@@ -40,7 +40,7 @@ module.exports = (db) => {
        //if ("password" === user.user_password)
       if (bcrypt.compareSync(password, user.user_password))
       {
-        console.log("line 38: ", user);
+        console.log("line 43 ", user);
         return user;
       }
       return null;
@@ -49,23 +49,20 @@ module.exports = (db) => {
   exports.login = login;
 
   router.post("/", (req, res) => {
-    // console.log("This is posting");
-
     const{email, password} = req.body;
 
     login(email, password)
     // console.log("line 52")
     .then (user => {
-       //console.log("!!!!!!!!!!!!!!!", user);
+       console.log("!!!!!!!!!!!!!!!", user);
       if(!user) {
         res.status(403).send("please check your username and password again. :) ");
         // res.send({error: "error"});
         return;
       }
+      req.session.id = user.id;
       req.session.email = user.email; // create an id key with the value of user.id === 1
 
-      // console.log("req.session.userID: ", req.session);
-      // res.send({user: {email: user.email, id: user.id}});
       res.redirect('/');
     })
     .catch(e => {console.log("line 67",e); res.send(e)});

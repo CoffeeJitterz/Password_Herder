@@ -40,11 +40,13 @@ function generatePassword() {
     password += createPassword;
   }
   document.getElementById('pass-text').value = password;
+
   if (!(isUpperCase || isLowerCase || isNumber || isSymbol)) {
 
     $(".empty").hide();
     return;
   }
+  //  return password;
 };
 
 // Copy password button

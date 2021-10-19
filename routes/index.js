@@ -49,9 +49,9 @@ module.exports = (db) => {
    })
   })
 
-  router.post("/:id/edit", (req, res) => {
-    console.log("I AM EDIT")
-  })
+  // router.post("/:id/edit", (req, res) => {
+  //   console.log("I AM EDIT")
+  // })
 
 
   return router;
