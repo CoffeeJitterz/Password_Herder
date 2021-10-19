@@ -13,8 +13,9 @@ const pool = new Pool ({
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    const templateVars = {email: req.session.email};
     console.log("this is getting");
-    res.render("register");
+    res.render("register", templateVars);
   });
 
   const addUser = function (org, em, pw) {
@@ -61,10 +62,13 @@ module.exports = (db) => {
 
     addUser(info.organization_name, info.email, info.password)
     .then((result) => {
+      console.log("this is line 65: ", result);
+
       if(!result) {
         res.status(500).send("wrong info!");
       }
       else {
+        req.session.email = result.rows.email;
         res.redirect('/');
       };
     })

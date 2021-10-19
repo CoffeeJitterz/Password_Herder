@@ -14,7 +14,6 @@ const pool = new Pool ({
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-
     const templateVars = {email: req.session.email};
     res.render("login", templateVars);
   });
