@@ -21,6 +21,26 @@
 </head>
 
 <body>
+  <div id="filter-form">
+    <form action="/category" method="POST">
+      <select class="form-select " aria-label="Default select example">
+        <option selected>SELECT CATEGORY</option>
+        <% for(let y = 0; y < categories.length; y++) { %>
+        <option value="1"><%=categories[y]%></option>
+        <% } %>
+      </select>
+      <button type="submit">FILTER</button>
+    </form>
+    <form action="/organization" method="GET">
+      <select class="form-select" aria-label="Default select example">
+        <option selected>SELECT ORGANIZATION</option>
+        <% for(let c = 0; c < organizations.length; c++) { %>
+          <option ><%=organizations[c]%></option>
+          <% } %>
+      </select>
+    </form>
+  </div>
+
   <%- include('partials/_header') %>
   <table class="table table-dark table-hover">
     <thead>

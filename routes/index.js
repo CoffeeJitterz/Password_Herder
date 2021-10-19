@@ -5,7 +5,8 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT websites.name, website_username, website_password
               FROM passwords
-              JOIN websites ON websites.id = website_id;
+              JOIN organizations ON organizations.id = organization_id
+              JOIN websites ON websites.id = website_id
               `)
     .then(data => {
       //console.log(data)
