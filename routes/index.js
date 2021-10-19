@@ -1,56 +1,67 @@
+const { render } = require('ejs');
 const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-      // router.get("/", (req, res) => {
-      //   const queries = [
-      //     db.query(`SELECT passwords.id, websites.name as website, website_username, website_password
-      //              FROM passwords
-      //              JOIN websites ON websites.id = website_id`),
+      router.get("/", (req, res) => {
+        const queries = [
+          db.query(`SELECT passwords.id, websites.name as website, website_username, website_password
+                   FROM passwords
+                   JOIN websites ON websites.id = website_id`),
 
-      //     db.query(`
-      //               SELECT catagory
-      //               FROM websites
-      //               GROUP BY catagory`),
-      //     db.query(`
-      //               SELECT name
-      //               FROM organizations
-      //               `),
-      //   ];
-      //  return P
-      // });
-  router.get("/", (req, res) => {
-    //console.log(req.body)
-    db.query(`SELECT passwords.id, websites.name as website, website_username, website_password, category, organizations.name as organization
-              FROM passwords
-              JOIN organizations ON organizations.id = organization_id
-              JOIN websites ON websites.id = website_id
-              `)
-    .then(data => {
-      const passwords = data.rows;
+          db.query(`
+                    SELECT category
+                    FROM websites
+                    GROUP BY category`),
+          db.query(`
+                    SELECT name
+                    FROM organizations
+                    `),
+        ];
+       return Promise.all(queries)
+       .then(results => {
+         const passwords = results[0].rows;
+         const organizations = results[2].rows;
+         const categories = results[1].rows;
+         const email = req.session.email
+         const templateVars = {passwords, categories, organizations, email};
+         res.render("index", templateVars);
 
-      const categoriesObj = {};
-      for (let i = 0; i < passwords.length; i++) {
-        categoriesObj[passwords[i].category] = 1;
-      }
-      const categories = Object.keys(categoriesObj);
+       })
+      });
 
-      const organizationsObj = {};
-      for (let y = 0; y < passwords.length; y++) {
-        organizationsObj[passwords[y].organization] = 1;
-      }
-      const organizations = Object.keys(organizationsObj);
+  // router.get("/", (req, res) => {
+  //   //console.log(req.body)
+  //   db.query(`SELECT passwords.id, websites.name as website, website_username, website_password, category, organizations.name as organization
+  //             FROM passwords
+  //             JOIN organizations ON organizations.id = organization_id
+  //             JOIN websites ON websites.id = website_id
+  //             `)
+  //   .then(data => {
+  //     const passwords = data.rows;
 
-      const templateVars = {passwords, email: req.session.email, categories, organizations};
-      console.log("I AM TEMPLATEVARS", templateVars)
-      res.render("index", templateVars);
-    })
-    .catch(err => {
-      res
-      .status(500)
-      .json({ error: err.message });
-    });
-  });
+  //     const categoriesObj = {};
+  //     for (let i = 0; i < passwords.length; i++) {
+  //       categoriesObj[passwords[i].category] = 1;
+  //     }
+  //     const categories = Object.keys(categoriesObj);
+
+  //     const organizationsObj = {};
+  //     for (let y = 0; y < passwords.length; y++) {
+  //       organizationsObj[passwords[y].organization] = 1;
+  //     }
+  //     const organizations = Object.keys(organizationsObj);
+
+  //     const templateVars = {passwords, email: req.session.email, categories, organizations};
+  //     console.log("I AM TEMPLATEVARS", templateVars)
+  //     res.render("index", templateVars);
+  //   })
+  //   .catch(err => {
+  //     res
+  //     .status(500)
+  //     .json({ error: err.message });
+  //   });
+  // });
 
   router.get("/:id/copy", (req, res) => {
    console.log("I AM COPY");
