@@ -5,13 +5,28 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     //console.log(req.body)
-    db.query(`SELECT passwords.id, websites.name, website_username, website_password
+    db.query(`SELECT passwords.id, websites.name as website, website_username, website_password, category, organizations.name as organization
               FROM passwords
-              JOIN websites ON websites.id = website_id;
+              JOIN organizations ON organizations.id = organization_id
+              JOIN websites ON websites.id = website_id
               `)
     .then(data => {
       const passwords = data.rows;
-      const templateVars = {passwords, email: req.session.email};
+
+      const categoriesObj = {};
+      for (let i = 0; i < passwords.length; i++) {
+        categoriesObj[passwords[i].category] = 1;
+      }
+      const categories = Object.keys(categoriesObj);
+
+      const organizationsObj = {};
+      for (let y = 0; y < passwords.length; y++) {
+        organizationsObj[passwords[y].organization] = 1;
+      }
+      const organizations = Object.keys(organizationsObj);
+
+      const templateVars = {passwords, email: req.session.email, categories, organizations};
+      console.log("I AM TEMPLATEVARS", templateVars)
       res.render("index", templateVars);
     })
     .catch(err => {
@@ -51,8 +66,12 @@ module.exports = (db) => {
 
   router.post("/:id/edit", (req, res) => {
     console.log("I AM EDIT")
+    res.redirect("/:id/edit")
   })
 
+  router.post("/category", (req, res) => {
+    console.log(req.body)
+  })
 
   return router;
 };

@@ -21,11 +21,13 @@
 </head>
 
 <body>
+  <%- include('partials/_header') %>
   <h3>PassWord Generator </h3>
   <div class="container">
     <p id="passwordBox"></p>
     <i class="far fa-clipboard" onclick="copyPassword()"></i>
   </div>
+
   <div>
     <label for="length">Password Length</label>
     <input type="number" id="pwdlength" min="8" max="15" value="8">
@@ -47,13 +49,26 @@
     <input type="checkbox" name="symbols" id="symbols">
   </div>
   <span class="empty">Please select at least one of the options!!</span>
-  <button onclick="generatePassword()" class="btn btn-primary">Generate Password</button>
-  <button type="submit" class="btn btn-primary">Save</button>
-  <div class="passwordBox">Your Password:</div>
-  <div>
-    <textarea name="text" id="pass-text"></textarea>
-    <button id="copy" onclick="copy()">Copy</button>
+  <form action="/new" method="POST" >
+      <button onclick="generatePassword()" class="btn btn-primary">Generate Password</button>
+      <div>
+        <label for="website_name">Website Name</label>
+        <input name="web_name" type = "text" placeholder="website name">
+      </div>
+
+      <div>
+        <label for="website_username">Website Username</label>
+        <input name="website_username" type = "text" placeholder="website Username">
+      </div>
+
+      <div class="passwordBox">Your Password:</div>
+
+      <div>
+        <textarea name="text" id="pass-text"></textarea>
+        <button id="copy" onclick="copy()">Copy</button>
+        <button type="submit" class="btn btn-primary">Submit/Save</button>
   </div>
+</form>
 </body>
 
 </html>
