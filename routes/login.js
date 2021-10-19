@@ -19,7 +19,7 @@ module.exports = (db) => {
   });
 
   const getUserWithEmail = function (email) {
-    console.log("getting email");
+    // console.log("getting email");
     return pool
     .query ( `SELECT * FROM users WHERE email = $1` , [email.toLowerCase()])
     .then((result) => {
@@ -34,13 +34,13 @@ module.exports = (db) => {
   exports.getUserWithEmail = getUserWithEmail;
 
   const login = function(email, password) {
-    console.log("getting login");
+    // console.log("getting login");
     return getUserWithEmail(email)
     .then(user =>{
        //if ("password" === user.user_password)
       if (bcrypt.compareSync(password, user.user_password))
       {
-        console.log("line 43 ", user);
+        // console.log("line 43 ", user);
         return user;
       }
       return null;
@@ -54,7 +54,7 @@ module.exports = (db) => {
     login(email, password)
     // console.log("line 52")
     .then (user => {
-       console.log("!!!!!!!!!!!!!!!", user);
+      //  console.log("!!!!!!!!!!!!!!!", user);
       if(!user) {
         res.status(403).send("please check your username and password again. :) ");
         // res.send({error: "error"});
@@ -62,8 +62,19 @@ module.exports = (db) => {
       }
       req.session.id = user.id;
       req.session.email = user.email; // create an id key with the value of user.id === 1
+      console.log("id", req.session.id , "email", req.session.email);
 
-      res.redirect('/');
+
+      return pool
+      .query(`SELECT organization_id
+              FROM users_organizations
+              WHERE user_id = ${user.id}`)
+      .then((result) => {
+        // console.log("line 73_organization_id: ", result.rows[0]);
+        req.session = {id: user.id, email: user.email, org_id: result.rows[0].organization_id};
+        // console.log("line 75", req.session);
+        res.redirect('/');
+      })
     })
     .catch(e => {console.log("line 67",e); res.send(e)});
   })

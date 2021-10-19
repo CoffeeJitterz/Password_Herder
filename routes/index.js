@@ -26,7 +26,7 @@ module.exports = (db) => {
       const organizations = Object.keys(organizationsObj);
 
       const templateVars = {passwords, email: req.session.email, categories, organizations};
-      console.log("I AM TEMPLATEVARS", templateVars)
+      // console.log("I AM TEMPLATEVARS", templateVars)
       res.render("index", templateVars);
     })
     .catch(err => {
@@ -37,14 +37,14 @@ module.exports = (db) => {
   });
 
     //// smiti new post
-  router.post("/", (req, res) => {
-    console.log("website_category:: " + req.body.website_category);
-    // db.query(`INSERT INTO passwords.id, websites.name, website_username, website_password
-    //           FROM passwords
-    //           JOIN websites ON websites.id = website_id;
-    //           `);
-    res.redirect("/");
-  });
+  // router.post("/", (req, res) => {
+  //   console.log("website_category:: " + req.body.website_category);
+  //   // db.query(`INSERT INTO passwords.id, websites.name, website_username, website_password
+  //   //           FROM passwords
+  //   //           JOIN websites ON websites.id = website_id;
+  //   //           `);
+  //   res.redirect("/");
+  // });
 
   router.get("/:id/copy", (req, res) => {
    console.log("I AM COPY");

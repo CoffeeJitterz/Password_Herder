@@ -22,11 +22,10 @@ CREATE TABLE users_organizations (
  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE
 );
 
-
 CREATE TABLE websites (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR (255) NOT NULL,
-  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
+  -- organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
   category VARCHAR(255) NOT NULL
 );
 

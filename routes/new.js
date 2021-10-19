@@ -20,7 +20,7 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     if (req.session.email) {
-            console.log("line 70 success");
+            // console.log("line 70 success");
             const templateVars = {email: req.session.email};
             res.render("new",templateVars);
     } else {
@@ -32,10 +32,9 @@ module.exports = (db) => {
   });
 
 
-
   router.post("/", (req, res) => {
     // console.log(req.body);
-    console.log("is there an email?", req.session.email);
+    // console.log("is there an email?", req.session.email);
 
 
     if (req.body.text !== "" &&
@@ -49,7 +48,7 @@ module.exports = (db) => {
           req.session.website_username = req.body.website_username;
 
           const addNew = function (wb_name, wb_un, wb_pw, wb_ct) {
-            console.log("this is the addNew function!!!")
+            // console.log("this is the addNew function!!!")
 
             const conditions = [
               pool.query (`SELECT * FROM websites WHERE name = $1; `, [wb_name]),
@@ -57,21 +56,31 @@ module.exports = (db) => {
 
             return Promise.all(conditions)
             .then ((results) => {
-              console.log(results[0]);
+              // console.log(results[0]);
               if(results[0].rows.length === 0 ) {
-                console.log("success");
-                return pool
-                .query (`INSERT INTO websites (name, category) VALUES ($1, $2) RETURNING *;`, [wb_name,wb_ct])
+                // console.log("success");
+
+                pool
+                .query (`INSERT INTO websites (name, category) VALUES ($1, $2) RETURNING id;`, [wb_name,wb_ct])
                 .then ((result)  => {
-                  console.log("insert to websites: ", result)
+                  // console.log("insert to websites: ", result)
                   if (!result) {
                     console.log('insert to websites error!');
                     return;
                   }
+
+                  // console.log('this is new.js cookies: ', req.session);
+                  // console.log("this is from insert websites", result.rows[0].id);
+
+
                   return pool
-                  .query (`INSERT INTO passwords (website_username, website_password) VALUES ($1, $2) RETURNING *;`, [wb_un,wb_pw])
+                  .query (`INSERT INTO passwords
+                          (organization_id, user_id, website_id, website_username, website_password)
+                          VALUES (${req.session.org_id}, ${req.session.id},
+                            ${result.rows[0].id}, $1, $2) RETURNING *;`, [wb_un,wb_pw])
                   .then ((result) => {
-                    console.log("insert to the passwords: ", result)
+                    // console.log("this is line 82:", result);
+                    // console.log("insert to the passwords: ", result)
                     if (!result) {
                       console.log('insert to passwords error!');
                       return;
@@ -90,14 +99,15 @@ module.exports = (db) => {
           req.session.website_username,
           req.session.website_password,
           req.session.website_category)
-          .then ((result)=>{
-            console.log("weird");
-            if (!result) {
-              res.status(500).send("line 68 error");
-            } else {
-          res.redirect('/');
-        }
-        });
+        //   .then ((result)=>{
+        //     console.log("weird");
+        //     if (!result) {
+        //       res.status(500).send("line 68 error");
+        //     } else {
+
+        // }
+        // });
+        res.redirect('/');
       }
     })
   return router;

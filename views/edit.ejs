@@ -22,8 +22,8 @@
 
 <body>
   <%- include('partials/_header') %>
-              <h2>Let's edit </h3>
-              <h3>PassWord Generator </h3>
+              <h2>Let's edit!!! </h3>
+              <!-- <h3>PassWord Generator </h3>
               <div class="container">
                 <p id="passwordBox"></p>
                 <i class="far fa-clipboard" onclick="copyPassword()"></i>
@@ -48,17 +48,17 @@
                 <label>Include Symbols</label>
                 <input type="checkbox" name="symbols" id="symbols">
               </div>
-              <span class="empty">Please select at least one of the options!!</span>
-  <form action ='/edit' method ='POST'>
-              <button onclick="generatePassword()" class="btn btn-primary">Generate Password</button>
+              <span class="empty">Please select at least one of the options!!</span> -->
+  <form action="/edit/<%= webpw.id %>" method ='POST'>
+              <!-- <button onclick="generatePassword()" class="btn btn-primary">Generate Password</button> -->
 
               <div class="passwordBox">Your Password:</div>
               <div>
-                <textarea name="text" id="pass-text"></textarea>
+                <textarea name="text" id="pass-text"><%= webpw.website_password %></textarea>
                 <button id="copy" onclick="copy()">Copy</button>
               </div>
 
-              <div>
+              <!-- <div>
                 <label for="website_category">Website Category</label>
                 <input name="website_category" type="text" id="website_category" placeholder="website category">
               </div>
@@ -71,7 +71,7 @@
               <div>
                 <label for="website_username">Website UserName</label>
                 <input name="website_username" type="text" id="website_username" placeholder="website username">
-              </div>
+              </div> -->
 
               <button type="submit" class="btn btn-primary">Save</button>
   </form>
