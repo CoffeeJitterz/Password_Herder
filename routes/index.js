@@ -42,16 +42,6 @@ module.exports = (db) => {
   }
   });
 
-    //// smiti new post
-  // router.post("/", (req, res) => {
-  //   console.log("website_category:: " + req.body.website_category);
-  //   // db.query(`INSERT INTO passwords.id, websites.name, website_username, website_password
-  //   //           FROM passwords
-  //   //           JOIN websites ON websites.id = website_id;
-  //   //           `);
-  //   res.redirect("/");
-  // });
-
   router.get("/:id/copy", (req, res) => {
   //  console.log("I AM COPY");
    const passwordID = req.params.id;
@@ -71,38 +61,6 @@ module.exports = (db) => {
    })
   }
   });
-
-  router.post("/:id/delete", (req, res) => {
-    // console.log("I AM DELETE")
-    const passwordID = req.params.id;
-   console.log(passwordID);
-  if (req.session.id === undefined) {
-    res.redirect("login");
-  } else if (
-    db.query (`SELECT user_id FROM passwords
-              WHERE id = ${passwordID};`)
-    .then((result) => {
-      // console.log("expecting result", result.rows[0].user_id);
-      // console.log("expecting req.session.id", req.session.id);
-      const tf = (result.rows[0].user_id !== req.session.id);
-      console.log("expecting true or false", tf);
-      return tf;
-    })
-    ) {
-      res.send("your are not the creator of this password and you cannot delete this password")
-  } else {
-   db.query(` DELETE FROM passwords
-              WHERE id = ${passwordID}
-   `)
-   .then(password => {
-     res.redirect("/");
-   })
-  }
-  })
-
-  // router.post("/:id/edit", (req, res) => {
-  //   console.log("I AM EDIT")
-  // })
 
   router.post("/category", (req, res) => {
     console.log(req.body)
