@@ -2,22 +2,50 @@ const { render } = require('ejs');
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
-      router.get("/", (req, res) => {
-        const queries = [
-          db.query(`SELECT passwords.id, websites.name as website, website_username, website_password
-                   FROM passwords
-                   JOIN websites ON websites.id = website_id`),
 
-          db.query(`
-                    SELECT category
-                    FROM websites
-                    GROUP BY category`),
-          db.query(`
-                    SELECT name
-                    FROM organizations
-                    `),
-        ];
+
+module.exports = (db) => {
+
+      router.get("/", (req, res) => {
+        const category = req.query.categories;
+        const organization = req.query.organizations;
+        console.log(category, organization)
+        let queries;
+        if(!category){
+              queries = [
+            db.query(`SELECT passwords.id, websites.name, website_username, website_password, category
+                     FROM passwords
+                     JOIN websites ON websites.id = website_id
+                     `),
+
+            db.query(`
+                      SELECT category
+                      FROM websites
+                      GROUP BY category`),
+            db.query(`
+                      SELECT name
+                      FROM organizations
+                      `),
+          ];
+        } else if (category){
+              queries = [
+            db.query(`SELECT passwords.id, websites.name, website_username, website_password, category
+                     FROM passwords
+                     JOIN websites ON websites.id = website_id
+                     WHERE category = '${category}'`),
+
+            db.query(`
+                      SELECT category
+                      FROM websites
+                      GROUP BY category`),
+            db.query(`
+                      SELECT name
+                      FROM organizations
+                      `),
+          ];
+        }
+        //console.log(category);
+
        return Promise.all(queries)
        .then(results => {
          const passwords = results[0].rows;
@@ -29,39 +57,6 @@ module.exports = (db) => {
 
        })
       });
-
-  // router.get("/", (req, res) => {
-  //   //console.log(req.body)
-  //   db.query(`SELECT passwords.id, websites.name as website, website_username, website_password, category, organizations.name as organization
-  //             FROM passwords
-  //             JOIN organizations ON organizations.id = organization_id
-  //             JOIN websites ON websites.id = website_id
-  //             `)
-  //   .then(data => {
-  //     const passwords = data.rows;
-
-  //     const categoriesObj = {};
-  //     for (let i = 0; i < passwords.length; i++) {
-  //       categoriesObj[passwords[i].category] = 1;
-  //     }
-  //     const categories = Object.keys(categoriesObj);
-
-  //     const organizationsObj = {};
-  //     for (let y = 0; y < passwords.length; y++) {
-  //       organizationsObj[passwords[y].organization] = 1;
-  //     }
-  //     const organizations = Object.keys(organizationsObj);
-
-  //     const templateVars = {passwords, email: req.session.email, categories, organizations};
-  //     console.log("I AM TEMPLATEVARS", templateVars)
-  //     res.render("index", templateVars);
-  //   })
-  //   .catch(err => {
-  //     res
-  //     .status(500)
-  //     .json({ error: err.message });
-  //   });
-  // });
 
   router.get("/:id/copy", (req, res) => {
    console.log("I AM COPY");
@@ -96,8 +91,18 @@ module.exports = (db) => {
     res.redirect("/:id/edit")
   })
 
-  router.post("/category", (req, res) => {
-    console.log(req.body)
+  router.get("/category", (req, res) => {
+    const category = req.body.categories
+
+    db.query(`SELECT passwords.id, websites.name, website_username, website_password
+              FROM passwords
+              JOIN websites ON websites.id = website_id
+              WHERE category = '${category}'`)
+     .then(response => {
+       console.log(response.rows);
+     })
+
+    //res.redirect("/")
   })
 
   return router;

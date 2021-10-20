@@ -18,4 +18,45 @@ body {
 #filter-form {
   display: flex;
   flex-direction: row;
+  background-color: rgb(37, 37, 37);
+  #categories {
+    background-color: rgb(37, 37, 37);
+    color: white;
+  }
+  #organizations {
+    background-color: rgb(37, 37, 37);
+    color: white;
+  }
+}
+
+#table_container {
+  display: flex;
+  flex-direction: row;
+
+  .job {
+    background-color: yellow;
+  }
+  .social {
+    background-color: orange;
+  }
+  .educational {
+    background-color: orchid;
+  }
+  .hobby {
+    background-color: palegreen;
+  }
+  .entertainment {
+    background-color: red;
+  }
+}
+
+#sidebar {
+display: flex;
+flex-direction: column;
+}
+
+table{
+  .entertainment {
+    background-color: red;
+  }
 }

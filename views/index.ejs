@@ -22,53 +22,41 @@
 
 <body>
   <%- include('partials/_header') %>
+<main id="table_container">
+  <form id="sidebar" method="GET">
+    <% for(let y = 0; y < categories.length; y++) { %>
+    <input name="categories" type="submit" class="<%=categories[y].category%>" value="<%=categories[y].category%>">
+    <% } %>
+  </form>
 
-  <div id="filter-form">
-    <form action="/category" method="POST">
-      <select class="form-select " aria-label="Default select example">
-        <option selected>SELECT CATEGORY</option>
-        <% for(let y = 0; y < categories.length; y++) { %>
-        <option value="1"><%=categories[y].category%></option>
-        <% } %>
-      </select>
-      <button type="submit">FILTER</button>
-    </form>
-    <form action="/organization" method="GET">
-      <select class="form-select" aria-label="Default select example">
-        <option selected>SELECT ORGANIZATION</option>
-        <% for(let c = 0; c < organizations.length; c++) { %>
-          <option ><%=organizations[c].name%></option>
-          <% } %>
-      </select>
-    </form>
-  </div>
-
-  <table class="table table-dark table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Website</th>
-        <th scope="col">Username</th>
-        <th scope="col">Password</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-
-    </thead>
-    <% for(let i = 0; i < passwords.length; i++) { %>
-      <tbody id="passwords_container">
+    <table>
+      <thead>
         <tr>
-          <td><%= passwords[i].name %></td>
-          <td><%= passwords[i].website_username %></td>
-          <td><%= passwords[i].website_password %></td>
-          <form action="<%=passwords[i].id%>/copy" method="get"><td><button  id="copy">COPY</button></td></form>
-          <form action="<%=passwords[i].id%>/edit" method="POST"><td><button  id="edit">EDIT</button></td></form>
-          <form action="<%=passwords[i].id%>/delete" method="POST"><td><button  id="edit">DELETE</button></td></form>
+          <th scope="col">Website</th>
+          <th scope="col">Username</th>
+          <th scope="col">Password</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
         </tr>
-      </tbody>
-      <% } %>
-      <tfoot >
-        <form action="/new" method="GET"><td>CREATE<button type="submit">NEW</button></td></form>
-      </tfoot>
-    </table>
+
+      </thead>
+      <% for(let i = 0; i < passwords.length; i++) { %>
+        <tbody id="passwords_container">
+          <tr class="<%= passwords[i].category%>">
+            <td><%= passwords[i].name %></td>
+            <td><%= passwords[i].website_username %></td>
+            <td><%= passwords[i].website_password %></td>
+            <form action="<%=passwords[i].id%>/copy" method="get"><td><button  id="copy">COPY</button></td></form>
+            <form action="<%=passwords[i].id%>/edit" method="POST"><td><button  id="edit">EDIT</button></td></form>
+            <form action="<%=passwords[i].id%>/delete" method="POST"><td><button  id="delete">DELETE</button></td></form>
+          </tr>
+        </tbody>
+        <% } %>
+        <tfoot >
+          <form action="/new" method="GET"><td>CREATE<button type="submit">NEW</button></td></form>
+        </tfoot>
+      </table>
+  </div>
+</main>
   </html>
