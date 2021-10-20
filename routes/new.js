@@ -49,6 +49,7 @@ module.exports = (db) => {
 
           const addNew = function (wb_name, wb_un, wb_pw, wb_ct) {
             // console.log("this is the addNew function!!!")
+            console.log(wb_name, wb_un, wb_pw, wb_ct);
 
             const conditions = [
               pool.query (`SELECT * FROM websites WHERE name = $1; `, [wb_name]),
@@ -58,20 +59,20 @@ module.exports = (db) => {
             .then ((results) => {
               // console.log(results[0]);
               if(results[0].rows.length === 0 ) {
-                // console.log("success");
+                console.log("success");
 
                 pool
-                .query (`INSERT INTO websites (name, category) VALUES ($1, $2) RETURNING id;`, [wb_name,wb_ct])
+                .query (`INSERT INTO websites (name, category) VALUES ($1, $2) RETURNING *;`, [wb_name, wb_ct])
+                // .query(`select * from websites;`)
                 .then ((result)  => {
-                  // console.log("insert to websites: ", result)
+                  console.log("insert to websites: ", result)
                   if (!result) {
                     console.log('insert to websites error!');
                     return;
                   }
 
-                  // console.log('this is new.js cookies: ', req.session);
-                  // console.log("this is from insert websites", result.rows[0].id);
-
+                  console.log('this is new.js cookies: ', req.session);
+                  console.log("this is from insert websites", result.rows[0].id);
 
                   return pool
                   .query (`INSERT INTO passwords
