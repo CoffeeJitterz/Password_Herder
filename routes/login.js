@@ -33,14 +33,13 @@ module.exports = (db) => {
   }
   exports.getUserWithEmail = getUserWithEmail;
 
-  const login = function(email, password) {
+  const login = function(candidateEmail, candidatePassword) {
     // console.log("getting login");
-    return getUserWithEmail(email)
-    .then(user =>{
-       //if ("password" === user.user_password)
-      if (bcrypt.compareSync(password, user.user_password))
+    return getUserWithEmail(candidateEmail)
+    .then(user => {
+      console.log("user: ", user );
+      if (bcrypt.compareSync(candidatePassword, user.user_password))
       {
-        // console.log("line 43 ", user);
         return user;
       }
       return null;
@@ -49,34 +48,42 @@ module.exports = (db) => {
   exports.login = login;
 
   router.post("/", (req, res) => {
-    const{email, password} = req.body;
+    console.log("this is req.body: ",req.body);
+    const candidateEmail = req.body.email;
+    const candidatePassword = req.body.password;
 
-    login(email, password)
+    login(candidateEmail, candidatePassword)
     // console.log("line 52")
     .then (user => {
-      //  console.log("!!!!!!!!!!!!!!!", user);
+      console.log("login promise resolved: ", user);
       if(!user) {
+        console.log("user is falsy ", user);
         res.status(403).send("please check your username and password again. :) ");
         // res.send({error: "error"});
         return;
       }
-      req.session.id = user.id;
-      req.session.email = user.email; // create an id key with the value of user.id === 1
-      console.log("id", req.session.id , "email", req.session.email);
-
-
-      return pool
+      // req.session.id = user.id;
+      // req.session.email = user.email; // create an id key with the value of user.id === 1
+      console.log("user is truthy ", user);
+      pool
       .query(`SELECT organization_id
               FROM users_organizations
               WHERE user_id = ${user.id}`)
       .then((result) => {
-        // console.log("line 73_organization_id: ", result.rows[0]);
+        console.log("the organization db query has been resolved. result.rows[0]: ", result.rows[0]);
         req.session = {id: user.id, email: user.email, org_id: result.rows[0].organization_id};
         // console.log("line 75", req.session);
-        res.redirect('/');
+        res.redirect("/");
+      })
+      .catch(e => {
+        console.log("the organization db query has been rejected: ", e);
+        res.send(e);
       })
     })
-    .catch(e => {console.log("line 67",e); res.send(e)});
+    .catch(e => {
+      console.log("login promise rejected",e);
+      res.send(e);
+      });
   })
 
   router.post('/logout', (req, res) => {

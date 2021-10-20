@@ -69,33 +69,33 @@ VALUES (10, 'eventbrite','hobby');
 -- passwords
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (1,1,1,1, 'fb', 'fbp');
+VALUES (1,1,1,1, 'fb', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (2,1,1,2, 'tw', 'twp');
+VALUES (2,1,1,2, 'tw', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (3,1,1,3, 'ins', 'ins');
+VALUES (3,1,1,3, 'ins', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (4,1,2,4, 'li', 'lip');
+VALUES (4,1,2,4, 'li', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (5,1,2,5, 'bb', 'bbp');
+VALUES (5,1,2,5, 'bb', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (6,2,5,6, 'nf', 'nfp');
+VALUES (6,2,5,6, 'nf', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (7,2,5,7, 'cr', 'crp');
+VALUES (7,2,5,7, 'cr', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (8,2,6,8, 'lh', 'lhp');
+VALUES (8,2,6,8, 'lh', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (9,2,6,9, 'slh', 'lislhpp');
+VALUES (9,2,6,9, 'slh', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 INSERT INTO passwords (id, organization_id, user_id, website_id, website_username, website_password)
-VALUES (10,2,6,10, 'eb', 'ebp');
+VALUES (10,2,6,10, 'eb', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 

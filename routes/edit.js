@@ -9,6 +9,12 @@ const pool = new Pool ({
   database: 'midterm'
 })
 
+const bcrypt = require('bcrypt');
+const salt = bcrypt.genSaltSync(10);
+const hashPW = function(webPW) {
+  return bcrypt.hashSync(webPW, salt);
+}; //// this change the original pw to ^&%*^&**()
+
 module.exports = (db) => {
   router.get("/:pw_id", (req, res) => {
     if (req.session.id === undefined) {
@@ -35,9 +41,12 @@ module.exports = (db) => {
 
 
   router.post("/:pw_id", (req, res) => {
+      const newPW = hashPW(req.body.text);
+      console.log("this is the newPW: ", newPW);
+
       return  pool
       .query(`UPDATE passwords
-      SET website_password = '${req.body.text}'
+      SET website_password = '${newPW}'
       WHERE id = '${req.params.pw_id}';` )
       .then(res.redirect('/'))
   })

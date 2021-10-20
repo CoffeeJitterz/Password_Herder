@@ -14,6 +14,7 @@ module.exports = (db) => {
               FROM passwords
               JOIN organizations ON organizations.id = organization_id
               JOIN websites ON websites.id = website_id
+              ORDER BY id DESC;
               `)
     .then(data => {
       const passwords = data.rows;

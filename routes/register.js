@@ -36,19 +36,25 @@ module.exports = (db) => {
     ];
 
     return Promise.all(conditions)
-    .then((results) =>{
+    .then((results) => {
       if(results[0].rows.length === 1  && results[1].rows.length === 0) {
+
         return pool
         // insert the new user information.
-        .query (`INSERT INTO users (email, user_password) VALUES ($1, $2) RETURNING *`, [em, hashPW(pw)])
-        .then( (user) => {
-          console.log("this is user: ", user)
-          if(!user) {
-            console.log('error!');
-            return;
-          }
-          return user;
+        .query (`INSERT INTO users (email, user_password) VALUES ($1, $2) RETURNING *;`, [em, hashPW(pw)])
+        .then ((user)=> {
+          return pool
+          .query (`INSERT INTO users_organizations (user_id, organization_id) VALUES ($1, $2) RETURNING *;`, [user.rows[0].id, results[0].rows[0].id])
+          .then((user) => {
+            if(!user) {
+              console.log('error!');
+              return;
+            }
+            return user;
+          })
+          .catch(e => console.log(e));
         })
+        .catch(e => console.log(e));
       }
     })
   }

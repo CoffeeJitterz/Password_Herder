@@ -9,6 +9,14 @@ const pool = new Pool ({
   database: 'midterm'
 })
 
+const bcrypt = require('bcrypt');
+const salt = bcrypt.genSaltSync(10);
+const hashPW = function(webPW) {
+  return bcrypt.hashSync(webPW, salt);
+}; //// this change the original pw to ^&%*^&**()
+
+
+
 module.exports = (db) => {
   // function: add website info
   // - insert to websites database
@@ -78,7 +86,7 @@ module.exports = (db) => {
                   .query (`INSERT INTO passwords
                           (organization_id, user_id, website_id, website_username, website_password)
                           VALUES (${req.session.org_id}, ${req.session.id},
-                            ${result.rows[0].id}, $1, $2) RETURNING *;`, [wb_un,wb_pw])
+                            ${result.rows[0].id}, $1, $2) RETURNING *;`, [wb_un, hashPW(wb_pw)])
                   .then ((result) => {
                     // console.log("this is line 82:", result);
                     // console.log("insert to the passwords: ", result)
