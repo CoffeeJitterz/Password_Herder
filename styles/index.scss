@@ -1,0 +1,140 @@
+#organization {
+  background-color:  rgb(20, 20, 20);;
+  color: white;
+  width: 100vw;
+
+  h4{
+    margin: 1.5em;
+  }
+  #table_container {
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 255, 255);
+    margin: 1.5em;
+    padding: 1.5em;
+    height: 10vh;
+
+    #sidebar {
+      display: flex;
+      flex-direction: column;
+      margin: .5em;
+
+      .all {
+        background-color: rgb(218, 218, 218);
+        border: none;
+      }
+      .all:hover {
+        background-color: rgb(255, 255, 255);
+        border: none;
+      }
+
+      .job {
+        background-color: yellow;
+        border: none;
+      }
+      .job:hover {
+        background-color: rgb(255, 255, 208);
+        border: none;
+      }
+      .social {
+        background-color: orange;
+        border: none;
+      }
+      .social:hover {
+        background-color: rgb(255, 230, 183);
+        border: none;
+      }
+      .educational {
+        background-color: orchid;
+        border: none;
+      }
+      .educational:hover {
+        background-color: rgb(255, 206, 253);
+        border: none;
+      }
+      .hobby {
+        background-color: palegreen;
+        border: none;
+      }
+      .hobby:hover {
+        background-color: rgb(221, 255, 221);
+        border: none;
+      }
+      .entertainment {
+        background-color: red;
+        border: none;
+      }
+      .entertainment:hover {
+        background-color: rgb(255, 202, 202);
+        border: none;
+      }
+    }
+    table {
+      margin: .5em;
+      width: 100vw;
+      .job {
+        color: blue;
+        background-color: yellow;
+      }
+      .job:hover {
+        color: blue;
+        background-color: rgb(255, 255, 180);
+      }
+      .social {
+        background-color: orange;
+      }
+      .social:hover {
+        background-color: rgb(255, 217, 146);
+      }
+      .educational {
+        background-color: orchid;
+      }
+      .educational:hover {
+        background-color: rgb(255, 189, 253);
+      }
+      .hobby {
+        background-color: palegreen;
+      }
+      .hobby:hover {
+        background-color: rgb(209, 255, 209);
+      }
+      .entertainment {
+        background-color: red;
+      }
+      .entertainment:hover {
+        background-color: rgb(255, 194, 194);
+      }
+      #copy {
+        background-color: transparent;
+        color: white;
+        border: none;
+      }
+      #copy:hover {
+        background-color: transparent;
+        color: rgb(0, 0, 0);
+        border: none;
+      }
+      #edit {
+        background-color: transparent;
+        color: white;
+        border: none;
+      }
+      #edit:hover {
+        background-color: transparent;
+        color: rgb(0, 0, 0);
+        border: none;
+      }
+      #delete {
+        background-color: transparent;
+        color: white;
+        border: none;
+      }
+      #delete:hover {
+        background-color: transparent;
+        color: rgb(0, 0, 0);
+        border: none;
+      }
+    }
+  }
+}
+

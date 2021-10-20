@@ -2,61 +2,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+  background: rgb(20, 20, 20);
+  padding: 1.5em;
 }
 
-#filter-form {
-  display: flex;
-  flex-direction: row;
-  background-color: rgb(37, 37, 37);
-  #categories {
-    background-color: rgb(37, 37, 37);
-    color: white;
-  }
-  #organizations {
-    background-color: rgb(37, 37, 37);
-    color: white;
-  }
-}
-
-#table_container {
-  display: flex;
-  flex-direction: row;
-
-  .job {
-    background-color: yellow;
-  }
-  .social {
-    background-color: orange;
-  }
-  .educational {
-    background-color: orchid;
-  }
-  .hobby {
-    background-color: palegreen;
-  }
-  .entertainment {
-    background-color: red;
-  }
-}
-
-#sidebar {
-display: flex;
-flex-direction: column;
-}
-
-table{
-  .entertainment {
-    background-color: red;
-  }
-}

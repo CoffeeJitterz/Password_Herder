@@ -22,10 +22,6 @@ module.exports = (db) => {
                       SELECT category
                       FROM websites
                       GROUP BY category`),
-            db.query(`
-                      SELECT name
-                      FROM organizations
-                      `),
           ];
         } else if (category){
               queries = [
@@ -38,10 +34,7 @@ module.exports = (db) => {
                       SELECT category
                       FROM websites
                       GROUP BY category`),
-            db.query(`
-                      SELECT name
-                      FROM organizations
-                      `),
+
           ];
         }
         //console.log(category);
@@ -49,10 +42,9 @@ module.exports = (db) => {
        return Promise.all(queries)
        .then(results => {
          const passwords = results[0].rows;
-         const organizations = results[2].rows;
          const categories = results[1].rows;
          const email = req.session.email
-         const templateVars = {passwords, categories, organizations, email};
+         const templateVars = {passwords, categories, email};
          res.render("index", templateVars);
 
        })

@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/index.css" type="text/css" />
+
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -18,45 +20,69 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
   <%- include('partials/_header') %>
-<main id="table_container">
-  <form id="sidebar" method="GET">
-    <% for(let y = 0; y < categories.length; y++) { %>
-    <input name="categories" type="submit" class="<%=categories[y].category%>" value="<%=categories[y].category%>">
-    <% } %>
-  </form>
+    <main id="organization">
+      <div id="organization_tabs">
+        <h4>ORGANIZATION: COOL</h4>
+      </div>
+      <section id="table_container">
+        <form id="sidebar" method="GET">
+          <h5>CATEGORIES</h5>
+          <input name="all" type="submit" class="all" value="all">
+          <% for(let y=0; y < categories.length; y++) { %>
+            <input name="categories" type="submit" class="<%=categories[y].category%>"
+              value="<%=categories[y].category%>">
+            <% } %>
+        </form>
 
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Website</th>
-          <th scope="col">Username</th>
-          <th scope="col">Password</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Website</th>
+              <th scope="col">Username</th>
+              <th scope="col">Password</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
 
-      </thead>
-      <% for(let i = 0; i < passwords.length; i++) { %>
-        <tbody id="passwords_container">
-          <tr class="<%= passwords[i].category%>">
-            <td><%= passwords[i].name %></td>
-            <td><%= passwords[i].website_username %></td>
-            <td><%= passwords[i].website_password %></td>
-            <form action="<%=passwords[i].id%>/copy" method="get"><td><button  id="copy">COPY</button></td></form>
-            <form action="<%=passwords[i].id%>/edit" method="POST"><td><button  id="edit">EDIT</button></td></form>
-            <form action="<%=passwords[i].id%>/delete" method="POST"><td><button  id="delete">DELETE</button></td></form>
-          </tr>
-        </tbody>
-        <% } %>
-        <tfoot >
-          <form action="/new" method="GET"><td>CREATE<button type="submit">NEW</button></td></form>
-        </tfoot>
-      </table>
-  </div>
-</main>
-  </html>
+          </thead>
+          <% for(let i=0; i < passwords.length; i++) { %>
+            <tbody id="passwords_container">
+              <tr class="<%= passwords[i].category%>">
+                <td>
+                  <%= passwords[i].name %>
+                </td>
+                <td>
+                  <%= passwords[i].website_username %>
+                </td>
+                <td>
+                  <%= passwords[i].website_password %>
+                </td>
+                <form action="<%=passwords[i].id%>/copy" method="get">
+                  <td><button id="copy"><i class="fas fa-copy"></i></button></td>
+                </form>
+                <form action="<%=passwords[i].id%>/edit" method="POST">
+                  <td><button id="edit"><i class="fas fa-edit"></i></button></td>
+                </form>
+                <form action="<%=passwords[i].id%>/delete" method="POST">
+                  <td><button id="delete"><i class="fas fa-trash-alt"></i></button></td>
+                </form>
+              </tr>
+            </tbody>
+            <% } %>
+        </table>
+        </div>
+      </section>
+    </main>
+</body>
+
+</html>
