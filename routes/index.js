@@ -5,6 +5,11 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     //console.log(req.body)
+    // console.log("this is index: ", req.session.id);
+    if (req.session.id === undefined) {
+      res.redirect("login");
+    } else {
+      // display the table
     db.query(`SELECT passwords.id, websites.name as website, website_username, website_password, category, organizations.name as organization
               FROM passwords
               JOIN organizations ON organizations.id = organization_id
@@ -34,6 +39,7 @@ module.exports = (db) => {
       .status(500)
       .json({ error: err.message });
     });
+  }
   });
 
     //// smiti new post
@@ -47,9 +53,12 @@ module.exports = (db) => {
   // });
 
   router.get("/:id/copy", (req, res) => {
-   console.log("I AM COPY");
+  //  console.log("I AM COPY");
    const passwordID = req.params.id;
-   console.log(passwordID);
+  //  console.log(passwordID);
+  if (req.session.id === undefined) {
+    res.redirect("login");
+  } else {
    db.query(` SELECT website_password
               FROM passwords
               WHERE id = ${passwordID}
@@ -60,18 +69,35 @@ module.exports = (db) => {
      console.log(copiedPassword);
      res.redirect("/");
    })
+  }
   });
 
   router.post("/:id/delete", (req, res) => {
-    console.log("I AM DELETE")
+    // console.log("I AM DELETE")
     const passwordID = req.params.id;
    console.log(passwordID);
+  if (req.session.id === undefined) {
+    res.redirect("login");
+  } else if (
+    db.query (`SELECT user_id FROM passwords
+              WHERE id = ${passwordID};`)
+    .then((result) => {
+      // console.log("expecting result", result.rows[0].user_id);
+      // console.log("expecting req.session.id", req.session.id);
+      const tf = (result.rows[0].user_id !== req.session.id);
+      console.log("expecting true or false", tf);
+      return tf;
+    })
+    ) {
+      res.send("your are not the creator of this password and you cannot delete this password")
+  } else {
    db.query(` DELETE FROM passwords
               WHERE id = ${passwordID}
    `)
    .then(password => {
      res.redirect("/");
    })
+  }
   })
 
   // router.post("/:id/edit", (req, res) => {
