@@ -1,10 +1,54 @@
-#button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+@import 'palette';
+#new_body{
+  background-color: $background_color;
+  #main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:$main_font_color;
+
+    padding: 1.5em;
+    #section {
+      display:flex;
+      flex-direction: row;
+
+
+      padding: 1.5em;
+      #check_boxes {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-end;
+        padding: 1.5em;
+
+      }
+      #form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-end;
+        padding: 1.5em;
+        #copy {
+          background-color: transparent;
+          color: $icon_color;
+          border: none;
+        }
+        #copy:hover {
+          background-color: transparent;
+          color: $icon_hover;
+          border: none;
+        }
+        #save {
+          background-color: transparent;
+          color: $icon_color;
+          border: none;
+        }
+        #save:hover {
+          background-color: transparent;
+          color: $icon_hover;
+          border: none;
+        }
+      }
+    }
+  }
 }

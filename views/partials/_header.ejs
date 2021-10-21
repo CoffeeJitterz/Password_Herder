@@ -2,32 +2,34 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
 
 <header>
-  <nav class="navbar navbar-expand-md navbar navbar-dark bg-dark d-flex justify-content-between">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-nav">
-      <a class="navbar-brand" href="/">Password Herder</a>
-      <a class="nav-item nav-link" href="/">My Passwords</a>
-      <a class="nav-item nav-link" href="/new">Create New</a>
+  <nav id="navbar">
+    <div >
+      <a class="logo" href="/">Password Herder</a>
+      <a class="nav_item" href="/new">Create New</a>
     </div>
 
     <!-- login form -->
     <% if (!email) { %>
-      <div class="navbar-nav d-flex justify-content-end">
-        <a class="nav-item nav-link" href="/login">Login</a>
-        <a class="nav-item nav-link" href="/register">Register</a>
+      <div>
+        <a class="login" href="/login">Login</a>
+        <a class="login" href="/register">Register</a>
       </div>
     <!-- logout form -->
     <% } else { %>
-      <form class = "form-inline" action ="/login/logout", method = "POST">
+      <form action ="/login/logout", method = "POST">
       <p> welcome: <%= email %> </p>
-      <button class="nav-item nav-link" type="submit">Logout</button>
+      <button type="submit" class="logout" >Logout</button>
       </form>
     <% }%>
+
+
+
+      </nav>
+
+</header>
 
 
 

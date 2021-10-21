@@ -62,5 +62,6 @@ function generatePassword() {
 $(document).ready(function() {
   $('#copy').click(function () {
     navigator.clipboard.writeText($("#pass-text").val());
+    alert("Password copied!!");
   });
 });

@@ -1,0 +1,138 @@
+@import 'palette';
+#organization {
+  background-color: $background_color;
+  color: $main_font_color;
+  width: 100vw;
+
+
+  #organization_tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: aqua;
+    width: 50vw;
+  }
+  #table_container {
+    display: flex;
+    flex-direction: row;
+    color: $main_font_color;
+    margin: 1.5em;
+    padding: 1.5em;
+    height: 10vh;
+
+    #sidebar {
+      display: flex;
+      flex-direction: column;
+      margin: .5em;
+
+      .all {
+        background-color: $main_font_color;
+        border: none;
+      }
+      .all:hover {
+        background-color: $second_font_color;
+        border: none;
+      }
+
+      .job {
+        background-color: $job_color;
+        border: none;
+      }
+      .job:hover {
+        background-color: $job_hover;
+        border: none;
+      }
+      .social {
+        background-color: $social_color;
+        border: none;
+      }
+      .social:hover {
+        background-color: $social_hover;
+        border: none;
+      }
+      .educational {
+        background-color: $education_color;
+        border: none;
+      }
+      .educational:hover {
+        background-color: $education_hover;
+        border: none;
+      }
+      .hobby {
+        background-color:$hobby_color;
+        border: none;
+      }
+      .hobby:hover {
+        background-color: $hobby_hover;
+        border: none;
+      }
+      .entertainment {
+        background-color: $entertainment_color;
+        border: none;
+      }
+      .entertainment:hover {
+        background-color: $entertainment_hover;
+        border: none;
+      }
+    }
+    table {
+      margin: .5em;
+      width: 100vw;
+      .job {
+        background-color: $job_color;
+      }
+      .job:hover {
+        background-color: $job_hover;
+      }
+      .social {
+        background-color: $social_color;
+      }
+      .social:hover {
+        background-color: $social_hover;
+      }
+      .educational {
+        background-color: $education_color;
+      }
+      .educational:hover {
+        background-color: $education_hover;
+      }
+      .hobby {
+        background-color: $hobby_color;
+      }
+      .hobby:hover {
+        background-color: $hobby_hover;
+      }
+      .entertainment {
+        background-color: $entertainment_color;
+      }
+      .entertainment:hover {
+        background-color: $entertainment_hover;
+      }
+      #copy {
+        background-color: transparent;
+        color: $icon_color;
+        border: none;
+      }
+      #copy:hover {
+        color: rgb(0, 0, 0);
+      }
+      #edit {
+        background-color: transparent;
+        color: $icon_color;
+        border: none;
+      }
+      #edit:hover {
+        color: rgb(0, 0, 0);
+      }
+      #delete {
+        background-color: transparent;
+        color: $icon_color;
+        border: none;
+      }
+      #delete:hover {
+        color: rgb(0, 0, 0);
+      }
+    }
+  }
+}
