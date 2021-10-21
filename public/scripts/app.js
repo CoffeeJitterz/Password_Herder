@@ -50,10 +50,17 @@ function generatePassword() {
 };
 
 // Copy password button
-function copy() {
-  // get password from input text field
-  let copyText = document.getElementById('pass-text').value;
-  console.log("copyText:", copyText);
-  //Copy the text from the text field
-  navigator.clipboard.writeText(copyText);
-};
+// function copy() {
+//   // get password from input text field
+//   let copyText = document.getElementById('pass-text').value;
+//   console.log("copyText:", copyText);
+//   //Copy the text from the text field
+//   navigator.clipboard.writeText(copyText);
+// };
+
+
+$(document).ready(function() {
+  $('#copy').click(function () {
+    navigator.clipboard.writeText($("#pass-text").val());
+  });
+});

@@ -1,6 +1,17 @@
 const express = require('express');
 const router  = express.Router();
 
+const CryptoJS = require("crypto-js");
+const encryptPW  = function (originalPW) {
+  console.log("this is the encrypted pw in the database: ", CryptoJS.AES.encrypt(originalPW, 'we are awesome').toString());
+  return CryptoJS.AES.encrypt(originalPW, 'we are awesome').toString();
+}
+const deCrypt = function (changedPW) {
+  const bytes  = CryptoJS.AES.decrypt(changedPW, 'we are awesome');
+  const originalText = bytes.toString(CryptoJS.enc.Utf8);
+  return originalText;
+};
+
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
@@ -17,22 +28,27 @@ module.exports = (db) => {
               ORDER BY id DESC;
               `)
     .then(data => {
-      const passwords = data.rows;
+      let passwords = data.rows;
+      // console.log("main page index passwords: ", data.rows);
+      for (let i of passwords) {
+        console.log("before decrypt: ", i.website_password);
+        i.website_password = deCrypt(i.website_password);
+        console.log("after decrypt: ", i.website_password);
+      };
 
       const categoriesObj = {};
       for (let i = 0; i < passwords.length; i++) {
         categoriesObj[passwords[i].category] = 1;
       }
-      const categories = Object.keys(categoriesObj);
+      const categories = Object.keys(categoriesObj); // grab all categories from the database
 
       const organizationsObj = {};
       for (let y = 0; y < passwords.length; y++) {
         organizationsObj[passwords[y].organization] = 1;
       }
-      const organizations = Object.keys(organizationsObj);
+      const organizations = Object.keys(organizationsObj); // grab all organizations from the database
 
-      const templateVars = {passwords, email: req.session.email, categories, organizations};
-      // console.log("I AM TEMPLATEVARS", templateVars)
+      const templateVars = {passwords, email: req.session.email, categories, organizations, deCrypt};
       res.render("index", templateVars);
     })
     .catch(err => {
@@ -43,6 +59,10 @@ module.exports = (db) => {
   }
   });
 
+  router.post("/category", (req, res) => {
+    console.log(req.body)
+  })
+
   router.get("/:id/copy", (req, res) => {
   //  console.log("I AM COPY");
    const passwordID = req.params.id;
@@ -50,21 +70,49 @@ module.exports = (db) => {
   if (req.session.id === undefined) {
     res.redirect("login");
   } else {
-   db.query(` SELECT website_password
-              FROM passwords
-              WHERE id = ${passwordID}
+   db.query(`
+    SELECT website_password
+    FROM passwords
+    WHERE id = ${passwordID}
    `)
    .then(password => {
      console.log("I'm from THEN!");
      const copiedPassword = password.rows[0].website_password;
      console.log(copiedPassword);
-     res.redirect("/");
    })
+   .then (() => res.redirect("/"))
   }
   });
 
-  router.post("/category", (req, res) => {
-    console.log(req.body)
+  router.post("/:id/delete", (req, res) => {
+    console.log("I AM DELETE");
+  const passwordID = req.params.id;
+  // console.log(passwordID);
+
+  if (req.session.id === undefined) {
+    res.redirect("login");
+    } else {
+      console.log("the user is logged in");
+      db.query (`SELECT user_id FROM passwords
+                WHERE id = ${passwordID};`)
+      .then((result) => {
+        console.log("expecting result", result.rows[0].user_id);
+        // console.log("expecting req.session.id", req.session.id);
+        const tf = (result.rows[0].user_id === req.session.id);
+        console.log("expecting true or false", tf);
+        if (tf) {
+          db
+          .query(` DELETE FROM passwords
+                WHERE id = ${passwordID}
+                `)
+          .then(() => {
+          res.redirect("/");
+          })
+        } else {
+          res.send("your are not the creator of this password and you cannot delete this password");
+        }
+      })
+    }
   })
 
   return router;

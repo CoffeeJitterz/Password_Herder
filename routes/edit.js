@@ -1,6 +1,18 @@
 const express = require('express');
 const router  = express.Router();
 
+const CryptoJS = require("crypto-js");
+const encryptPW  = function (originalPW) {
+  console.log("this is the encrypted pw in the database: ", CryptoJS.AES.encrypt(originalPW, 'we are awesome').toString());
+  return CryptoJS.AES.encrypt(originalPW, 'we are awesome').toString();
+};
+
+const deCrypt = function (changedPW) {
+  const bytes  = CryptoJS.AES.decrypt(changedPW, 'we are awesome');
+  const originalText = bytes.toString(CryptoJS.enc.Utf8);
+  return originalText;
+};
+
 const {Pool} = require('pg');
 const pool = new Pool ({
   user:'labber',
@@ -8,12 +20,6 @@ const pool = new Pool ({
   host:'localhost',
   database: 'midterm'
 })
-
-const bcrypt = require('bcrypt');
-const salt = bcrypt.genSaltSync(10);
-const hashPW = function(webPW) {
-  return bcrypt.hashSync(webPW, salt);
-}; //// this change the original pw to ^&%*^&**()
 
 module.exports = (db) => {
   router.get("/:pw_id", (req, res) => {
@@ -29,7 +35,11 @@ module.exports = (db) => {
             .query(`SELECT * FROM passwords WHERE id = ${req.params.pw_id}`)
             .then((result) => {
               const webpw = result.rows[0];
-              const templateVars = {email: req.session.email, webpw: webpw};
+              console.log('this is webpw: ', webpw);
+              const decryptedWebpw = deCrypt(webpw.website_password);
+              console.log("this is decrypted webpw: ", decryptedWebpw);
+
+              const templateVars = {email: req.session.email, webpw, decryptedWebpw};
               res.render("edit", templateVars);
             })
           } else {
@@ -41,7 +51,7 @@ module.exports = (db) => {
 
 
   router.post("/:pw_id", (req, res) => {
-      const newPW = hashPW(req.body.text);
+      const newPW = encryptPW(req.body.text);
       console.log("this is the newPW: ", newPW);
 
       return  pool

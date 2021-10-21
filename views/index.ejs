@@ -62,6 +62,7 @@
         <td><%= passwords[i].website_password %></td>
     <form action="<%=passwords[i].id%>/copy" method="get"><td><button  id="copy">COPY</button></td></form>
     <td><a href="/edit/<%= passwords[i].id %>" ><button  id="edit">EDIT</button></a></td>
+    <!-- <td><a href="/delete/<%= passwords[i].id %>" ><button  id="edit">DELETE</button></a></td> -->
     <form action="<%=passwords[i].id%>/delete" method="POST"><td><button  id="edit">DELETE</button></td></form>
       </tr>
     </tbody>

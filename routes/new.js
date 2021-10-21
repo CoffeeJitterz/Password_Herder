@@ -9,12 +9,11 @@ const pool = new Pool ({
   database: 'midterm'
 })
 
-const bcrypt = require('bcrypt');
-const salt = bcrypt.genSaltSync(10);
-const hashPW = function(webPW) {
-  return bcrypt.hashSync(webPW, salt);
-}; //// this change the original pw to ^&%*^&**()
-
+const CryptoJS = require("crypto-js");
+const encryptPW  = function (originalPW) {
+  console.log("this is the encrypted pw in the database: ", CryptoJS.AES.encrypt(originalPW, 'we are awesome').toString());
+  return CryptoJS.AES.encrypt(originalPW, 'we are awesome').toString();
+}
 
 
 module.exports = (db) => {
@@ -79,15 +78,17 @@ module.exports = (db) => {
                     return;
                   }
 
-                  console.log('this is new.js cookies: ', req.session);
-                  console.log("this is from insert websites", result.rows[0].id);
+                  // console.log('this is new.js cookies: ', req.session);
+                  // console.log("this is from insert websites", result.rows[0].id);
 
                   return pool
                   .query (`INSERT INTO passwords
                           (organization_id, user_id, website_id, website_username, website_password)
                           VALUES (${req.session.org_id}, ${req.session.id},
-                            ${result.rows[0].id}, $1, $2) RETURNING *;`, [wb_un, hashPW(wb_pw)])
+                            ${result.rows[0].id}, $1, $2) RETURNING *;`, [wb_un, encryptPW(wb_pw)])
                   .then ((result) => {
+                    console.log('encrypt mission completed');
+                    res.redirect("/");
                     // console.log("this is line 82:", result);
                     // console.log("insert to the passwords: ", result)
                     if (!result) {
@@ -98,26 +99,17 @@ module.exports = (db) => {
 
                 })
               }
+
             })
-
           }
-
          exports.addNew = addNew;
 
          addNew(req.session.website_name,
           req.session.website_username,
           req.session.website_password,
           req.session.website_category)
-        //   .then ((result)=>{
-        //     console.log("weird");
-        //     if (!result) {
-        //       res.status(500).send("line 68 error");
-        //     } else {
-
-        // }
-        // });
-        res.redirect('/');
       }
+
     })
   return router;
 };
