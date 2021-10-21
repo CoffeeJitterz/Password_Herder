@@ -1,11 +1,12 @@
 const express = require('express');
-const router  = express.Router();
+// const { encrypt, decrypt } = require('../crypto/cryptography');
+const router = express.Router();
 
-const {Pool} = require('pg');
-const pool = new Pool ({
-  user:'labber',
+const { Pool } = require('pg');
+const pool = new Pool({
+  user: 'labber',
   password: 'labber',
-  host:'localhost',
+  host: 'localhost',
   database: 'midterm'
 })
 
@@ -27,89 +28,89 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     if (req.session.email) {
-            // console.log("line 70 success");
-            const templateVars = {email: req.session.email};
-            res.render("new",templateVars);
+      // console.log("line 70 success");
+      const templateVars = { email: req.session.email };
+      res.render("new", templateVars);
     } else {
       return res.status(404).send("you need to login first.");
     }
-
-      // const templateVars = {email: req.session.email};
-      // res.render("new",templateVars);
   });
 
-
   router.post("/", (req, res) => {
-    // console.log(req.body);
-    // console.log("is there an email?", req.session.email);
-
-
     if (req.body.text !== "" &&
-        req.body.website_category !== "" &&
-        req.body.website_name !== "" &&
-        req.body.website_username !== "" ) {
+      req.body.website_category !== "" &&
+      req.body.website_name !== "" &&
+      req.body.website_username !== "") {
 
-          req.session.website_password = req.body.text;
-          req.session.website_category = req.body.website_category;
-          req.session.website_name = req.body.website_name;
-          req.session.website_username = req.body.website_username;
+      req.session.website_password = req.body.text;
+      req.session.website_category = req.body.website_category;
+      req.session.website_name = req.body.website_name;
+      req.session.website_username = req.body.website_username;
 
-          const addNew = function (wb_name, wb_un, wb_pw, wb_ct) {
-            // console.log("this is the addNew function!!!")
-            console.log(wb_name, wb_un, wb_pw, wb_ct);
+      // let secretKey = 'cOMH6sdmpKWjRTIqCc4rdxs01lwPzfr9';
+      // console.log(req.body.text);
+      // req.session.website_password = encrypt(req.body.text, secretKey);
+      // console.log(decrypt(encrypt(req.body.text, secretKey), secretKey));
 
-            const conditions = [
-              pool.query (`SELECT * FROM websites WHERE name = $1; `, [wb_name]),
-            ]
+      const addNew = function (wb_name, wb_un, wb_pw, wb_ct) {
+        const conditions = [
+          db.query(`SELECT * FROM websites WHERE name = $1; `, [wb_name]),
+          db.query(`SELECT users.id as user_id, users_organizations.organization_id as organization_id FROM users join users_organizations on users.id = users_organizations.user_id WHERE users.email = $1; `, [req.session.email]),
+        ]
+        return Promise.all(conditions)
+          .then((results) => {
 
-            return Promise.all(conditions)
-            .then ((results) => {
-              // console.log(results[0]);
-              if(results[0].rows.length === 0 ) {
-                console.log("success");
-
-                pool
-                .query (`INSERT INTO websites (name, category) VALUES ($1, $2) RETURNING *;`, [wb_name, wb_ct])
-                // .query(`select * from websites;`)
-                .then ((result)  => {
-                  console.log("insert to websites: ", result)
+           if (results[0].rows.length === 0) {
+              return db
+                .query(`INSERT INTO websites (name, category) VALUES ($1, $2) RETURNING *;`, [wb_name, wb_ct])
+                .then((result) => {
                   if (!result) {
-                    console.log('insert to websites error!');
+                    //console.log('insert to websites error!');
+                    return;
+                  }
+                  //console.log("Website ID:: " + result.rows[0].id);
+                  return db
+                    .query(`INSERT INTO passwords
+                    (organization_id, user_id, website_id, website_username, website_password)
+                    VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+                    [results[1].rows[0].organization_id, results[1].rows[0].user_id, result.rows[0].id, wb_un, encryptPW(wb_pw)])
+                    .then((result) => {
+                      console.log("insert to the passwords: ", result)
+                      if (!result) {
+                        //console.log('insert to passwords error!');
+                        return;
+                      }
+                    })
+
+                })
+            } else {
+              //console.log("Website exists, fetching the row");
+              return db
+                .query(`INSERT INTO passwords
+                 (organization_id, user_id, website_id, website_username, website_password)
+                 VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+                 [results[1].rows[0].organization_id, results[1].rows[0].user_id, results[0].rows[0].id, wb_un, encryptPW(wb_pw)])
+                .then((result) => {
+                  if (!result) {
                     return;
                   }
 
-                  // console.log('this is new.js cookies: ', req.session);
-                  // console.log("this is from insert websites", result.rows[0].id);
-
-                  return pool
-                  .query (`INSERT INTO passwords
-                          (organization_id, user_id, website_id, website_username, website_password)
-                          VALUES (${req.session.org_id}, ${req.session.id},
-                            ${result.rows[0].id}, $1, $2) RETURNING *;`, [wb_un, encryptPW(wb_pw)])
-                  .then ((result) => {
-                    console.log('encrypt mission completed');
-                    res.redirect("/");
-                    // console.log("this is line 82:", result);
-                    // console.log("insert to the passwords: ", result)
-                    if (!result) {
-                      console.log('insert to passwords error!');
-                      return;
-                    }
-                  })
-
                 })
-              }
+            }
+          })
 
-            })
-          }
-         exports.addNew = addNew;
-
-         addNew(req.session.website_name,
-          req.session.website_username,
-          req.session.website_password,
-          req.session.website_category)
       }
 
-    })
+      exports.addNew = addNew;
+
+      addNew(req.session.website_name,
+        req.session.website_username,
+        req.session.website_password,
+        req.session.website_category)
+        .then((result) => {
+          res.redirect('/');
+        });
+    }
+  });
   return router;
 };

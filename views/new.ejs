@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/new.scss" type="text/css" />
+  <link rel="stylesheet" href="/styles/new.css" type="text/css" />
+
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
@@ -18,73 +19,50 @@
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <!-- App JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body>
+<body id="new_body">
   <%- include('partials/_header') %>
+  <main id="main">
+  <h3>PassWord Generator </h3>
+  <section id="section">
+  <div id="check_boxes">
+  <div class="container">
+    <p id="passwordBox"></p>
+  </div>
+  <div>
+    <label for="length">Password Length</label>
+    <input type="number" id="pwdlength" min="8" max="15" value="8">
+  </div>
+  <div>
+    <label for="lowerCase">Include Lowercase</label>
+    <input type="checkbox" name="lowerCase" id="lowerCase">
+  </div>
+  <div>
+    <label for="upperCase"> Include Uppercase</label>
+    <input type="checkbox" name="upperCase" id="upperCase">
+  </div>
+  <div>
+    <label>Include Numbers</label>
+    <input type="checkbox" name="number" id="number">
+  </div>
+  <div>
+    <label>Include Symbols</label>
+    <input type="checkbox" name="symbols" id="symbols">
+  </div>
+  </div>
 
-              <h3>PassWord Generator </h3>
-              <div class="container">
-                <p id="passwordBox"></p>
-                <i class="far fa-clipboard" onclick="copyPassword()"></i>
-              </div>
-              <div>
-                <label for="length">Password Length</label>
-                <input type="number" id="pwdlength" min="8" max="15" value="8">
-              </div>
-              <div>
-                <label for="lowerCase">Include Lowercase</label>
-                <input type="checkbox" name="lowerCase" id="lowerCase">
-              </div>
-              <div>
-                <label for="upperCase"> Include Uppercase</label>
-                <input type="checkbox" name="upperCase" id="upperCase">
-              </div>
-              <div>
-                <label>Include Numbers</label>
-                <input type="checkbox" name="number" id="number">
-              </div>
-              <div>
-                <label>Include Symbols</label>
-                <input type="checkbox" name="symbols" id="symbols">
-              </div>
-              <span class="empty">Please select at least one of the options!!</span>
-  <form action ='/new' method ='POST'>
-              <button onclick="generatePassword()" class="btn btn-primary">Generate Password</button>
-
-              <div class="passwordBox">Your Password:</div>
-              <div>
-                <textarea name="text" id="pass-text"></textarea>
-                <button id="copy" onclick="copy()">Copy</button>
-              </div>
-
-              <div>
-                <label for="website_category">Website Category</label>
-                <input name="website_category" type="text" id="website_category" placeholder="website category">
-              </div>
-
-              <div>
-                <label for="website_name">Website Name</label>
-                <input name="website_name" type="text" id="website_name"  placeholder="website name">
-              </div>
-
-              <div>
-                <label for="website_username">Website UserName</label>
-                <input name="website_username" type="text" id="website_username" placeholder="website username">
-              </div>
-
-              <button type="submit" class="btn btn-primary">Save</button>
-  </form>
-
-<!--
-
-  /// smiti
-  <form method="POST" action="/">
-    <div>
+  <form id="form" method="POST" action="/new">
+    <div class="website_field">
       <label for="website_name">Website</label>
       <input type="text" name="website_name" id="website_name">
     </div>
-    <div>
+    <div class="category_field">
       <label for="website_category">Website Category</label>
       <select name="website_category" id="website_category">
         <option disabled selected value> -- select a category -- </option>
@@ -96,20 +74,26 @@
         <option value="hobby">Hobby</option>
       </select>
     </div>
-    <div>
+    <div class="username_field">
       <label for="website_username">User Name</label>
       <input type="text" name="website_username" id="website_username">
     </div>
-  <button type="submit" class="btn btn-primary">Save</button>
-  <div class="passwordBox">Your Password:</div>
-  <div>
-    <textarea name="text" id="pass-text"></textarea>
-    <button id="copy" onclick="copy()">Copy</button>
-  </div>
-</form> -->
+    <!-- <span class="empty">Please select at least one of the options!!</span> -->
+   <div class="password_field">
+     <label for="passwordBox">Your Password:</label>
+     <input name="text" id="pass-text">
+   </div>
 
+    <div class="buttons">
+      <button type="button" onclick="generatePassword()" class="btn btn-primary">Generate Password</button>
+        <button id="copy" name = "copy" id="copy"><i class="fas fa-copy"></i></button>
+        <button id="save" type="submit"><i class="fas fa-save"></i></button>
 
+    </div>
 
+</form>
+</section>
+</main>
 </body>
 
 </html>
