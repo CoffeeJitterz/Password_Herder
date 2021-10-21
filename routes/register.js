@@ -56,6 +56,18 @@ module.exports = (db) => {
         })
         .catch(e => console.log(e));
       }
+      return pool
+      .query (`INSERT INTO users (email, user_password) VALUES ($2, $3) RETURNING *`, [em, bcrypt.hashSync(pw)])
+      .then( (user) => {
+        if(!user) {
+          console.log('error!');
+          return;
+        }
+        return user ;
+      })
+    })
+    .catch((err) => {
+      return "line 44 error!";
     })
   }
 
@@ -63,8 +75,8 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const info = req.body;
-    // console.log("This is posting");
-    // console.log("req.body: ", req.body);
+    console.log("This is posting");
+    console.log("req.body: ", req.body);
 
     addUser(info.organization_name, info.email, info.password)
     .then((result) => {
