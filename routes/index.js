@@ -29,24 +29,26 @@ module.exports = (db) => {
           db.query(`SELECT passwords.id, websites.name, website_username, website_password, category
                    FROM passwords
                    JOIN websites ON websites.id = website_id
+                   ORDER BY passwords.id DESC;
                    `),
 
           db.query(`
                     SELECT category
                     FROM websites
-                    GROUP BY category`),
+                    GROUP BY category;`),
 
           db.query(`
                     SELECT id, name
                     FROM organizations
-                    WHERE id = '${organization_id}'`)
+                    WHERE id = '${organization_id}';`)
         ];
       } else if (category){
             queries = [
           db.query(`SELECT passwords.id, websites.name, website_username, website_password, category
                    FROM passwords
                    JOIN websites ON websites.id = website_id
-                   WHERE category = '${category}'`),
+                   WHERE category = '${category}'
+                   ORDER BY passwords.id DESC;`),
 
           db.query(`
                     SELECT category
@@ -83,44 +85,6 @@ module.exports = (db) => {
 
      })
 
-
-
-
-    // db.query(`SELECT passwords.id, websites.name as website, website_username, website_password, category, organizations.name as organization
-    //           FROM passwords
-    //           JOIN organizations ON organizations.id = organization_id
-    //           JOIN websites ON websites.id = website_id
-    //           ORDER BY id DESC;
-    //           `)
-    // .then(data => {
-    //   let passwords = data.rows;
-    //   // console.log("main page index passwords: ", data.rows);
-    //   for (let i of passwords) {
-    //     console.log("before decrypt: ", i.website_password);
-    //     i.website_password = deCrypt(i.website_password);
-    //     console.log("after decrypt: ", i.website_password);
-    //   };
-
-    //   const categoriesObj = {};
-    //   for (let i = 0; i < passwords.length; i++) {
-    //     categoriesObj[passwords[i].category] = 1;
-    //   }
-    //   const categories = Object.keys(categoriesObj); // grab all categories from the database
-
-    //   const organizationsObj = {};
-    //   for (let y = 0; y < passwords.length; y++) {
-    //     organizationsObj[passwords[y].organization] = 1;
-    //   }
-    //   const organizations = Object.keys(organizationsObj); // grab all organizations from the database
-
-    //   const templateVars = {passwords, email: req.session.email, categories, organizations, deCrypt};
-    //   res.render("index", templateVars);
-    // })
-    // .catch(err => {
-    //   res
-    //   .status(500)
-    //   .json({ error: err.message });
-    // });
   }
   });
 

@@ -23,6 +23,7 @@ const pool = new Pool ({
 
 module.exports = (db) => {
   router.get("/:pw_id", (req, res) => {
+    console.log("this is the edit page");
     if (req.session.id === undefined) {
       res.redirect("login");
       } else {

@@ -76,9 +76,16 @@
                 <form action="<%=passwords[i].id%>/copy" method="get">
                   <td><button id="copy"><i class="fas fa-copy"></i></button></td>
                 </form>
-                <form action="<%=passwords[i].id%>/edit" method="POST">
-                  <td><a href="/edit/<%= passwords[i].id %>" ></a><button id="edit"><i class="fas fa-edit"></i></button></td>
+
+
+                <form action="/edit/<%= passwords[i].id %>" method="get">
+                  <td><button id="edit"><i class="fas fa-edit"></i></button></td>
                 </form>
+
+
+                <!-- <td><a href="/edit/<%= passwords[i].id %>" ><button  id="edit">EDIT</button></a></td> -->
+
+
                 <form action="<%=passwords[i].id%>/delete" method="POST">
                   <td><button id="delete"><i class="fas fa-trash-alt"></i></button></td>
                 </form>
