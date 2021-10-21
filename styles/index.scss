@@ -1,15 +1,17 @@
+@import 'palette';
 #organization {
-  background-color:  rgb(20, 20, 20);;
-  color: white;
+  background-color: $background_color;
+  color: $main_font_color;
   width: 100vw;
 
+
   h4{
-    margin: 1.5em;
+    margin: 1em;
   }
   #table_container {
     display: flex;
     flex-direction: row;
-    color: rgb(255, 255, 255);
+    color: $main_font_color;
     margin: 1.5em;
     padding: 1.5em;
     height: 10vh;
@@ -20,11 +22,11 @@
       margin: .5em;
 
       .all {
-        background-color: rgb(218, 218, 218);
+        background-color: $main_font_color;
         border: none;
       }
       .all:hover {
-        background-color: rgb(255, 255, 255);
+        background-color: $highlight_color;
         border: none;
       }
 
@@ -73,12 +75,10 @@
       margin: .5em;
       width: 100vw;
       .job {
-        color: blue;
-        background-color: yellow;
+        background-color: $job_color;
       }
       .job:hover {
-        color: blue;
-        background-color: rgb(255, 255, 180);
+        background-color: $job_hover;
       }
       .social {
         background-color: orange;
@@ -106,33 +106,27 @@
       }
       #copy {
         background-color: transparent;
-        color: white;
+        color: $icon_color;
         border: none;
       }
       #copy:hover {
-        background-color: transparent;
         color: rgb(0, 0, 0);
-        border: none;
       }
       #edit {
         background-color: transparent;
-        color: white;
+        color: $icon_color;
         border: none;
       }
       #edit:hover {
-        background-color: transparent;
         color: rgb(0, 0, 0);
-        border: none;
       }
       #delete {
         background-color: transparent;
-        color: white;
+        color: $icon_color;
         border: none;
       }
       #delete:hover {
-        background-color: transparent;
         color: rgb(0, 0, 0);
-        border: none;
       }
     }
   }

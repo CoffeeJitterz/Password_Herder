@@ -74,6 +74,14 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// app.post("/", (req, res) => {
+//   // Save the data to DB
+//   console.log("Request:: " + req.body.website_name);
+//   //forward to index
+//   console.log("here .....");
+//   res.redirect("/");
+// });
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

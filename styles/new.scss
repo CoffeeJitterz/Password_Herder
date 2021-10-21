@@ -8,3 +8,48 @@
   display: inline-block;
   font-size: 16px;
 }
+
+@import 'pallete';
+
+#new_body {
+    background-color: $background;
+    margin: 1.5em;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.text-wrap {
+  position: relative;
+  background-color: #fff;
+  padding: 0.5em;
+}
+
+textarea {
+  min-width: 20vw;
+  max-width: 80vw;
+  min-height: 200px;
+  max-height: 80vh;
+  padding: 0.8em 1em;
+  font-size: 1em;
+
+}
+textarea::-webkit-scrollbar {
+    width: 4px;
+}
+textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+textarea::-webkit-scrollbar-thumb {
+    background: #888;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+

@@ -1,8 +1,8 @@
 -- Drop and recreate Users table (Example)
 
-DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS organizations CASCADE;
 DROP TABLE IF EXISTS users_organizations CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS passwords CASCADE;
 DROP TABLE IF EXISTS websites CASCADE;
 
@@ -25,7 +25,6 @@ CREATE TABLE users_organizations (
 CREATE TABLE websites (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR (255) NOT NULL,
-  -- organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
   category VARCHAR(255) NOT NULL
 );
 

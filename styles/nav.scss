@@ -1,45 +1,54 @@
+@import 'palette';
 header {
+  font-family: $main_font;
   #navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background: rgb(255,0,0);
-    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,218,0,1) 13%, rgba(0,255,12,1) 29%, rgba(0,241,255,1) 47%, rgba(0,65,255,1) 62%, rgba(255,0,254,1) 78%, rgba(255,0,0,1) 93%);
+    background: $nav_color;
     padding: 1em;
 
     .logo {
-      color: yellow;
+      color: $second_font_color;
+      background-color: $nav_item_color;
       text-decoration: none;
-      font-family: 'Brush Script MT', cursive;
+      font-family: $logo_font;
       font-size: 2.5em;
-      padding: 1em;
+      padding: .5em;
     }
     .logo:hover {
-      color: rgb(17, 0, 255);
-      text-decoration: none;
-      font-family: 'Brush Script MT', cursive;
-      font-size: 2.5em;
-      padding: 1em;
+      color: $nav_item_hover;
     }
     .nav_item {
-      color: hotpink;
-      background-color: yellow;
+      color: $second_font_color;
+      background-color: $nav_item_color;
       text-decoration: none;
       margin: .5em;
       padding: .5em;
     }
     .nav_item:hover {
-      color: rgb(155, 155, 155);
-      text-decoration: none;
-      margin: .5em;
-      padding: .5em;
+      color: $nav_item_hover;
     }
     .login {
-      background-color: yellow;
-      color: hotpink;
+      background-color: $nav_item_color;
+      color: $second_font_color;
       text-decoration: none;
       padding: .5em;
+    }
+    .login:hover {
+      background-color: $nav_item_hover;
+    }
+    .logout {
+      background-color: $nav_item_color;
+      color: $second_font_color;
+      text-decoration: none;
+      padding: .5em;
+      border: none;
+    }
+    .logout:hover {
+      background-color: $nav_item_hover;
+
     }
   }
 }

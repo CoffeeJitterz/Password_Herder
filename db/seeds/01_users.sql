@@ -31,52 +31,52 @@ INSERT INTO users_organizations (user_id, organization_id) VALUES (8,2);
 
 
 -- websites
--- INSERT INTO websites(id, name, category, organization_id)
--- VALUES (1, 'facebook', 'social', 1);
+INSERT INTO websites(id, name, category, organization_id)
+VALUES (1, 'facebook', 'social', 1);
 
--- INSERT INTO websites(id, name, category, organization_id)
--- VALUES (2, 'twitter','social', 1);
+INSERT INTO websites(id, name, category, organization_id)
+VALUES (2, 'twitter','social', 1);
 
--- INSERT INTO websites(id, name, category, organization_id)
--- VALUES (3, 'instagram','social', 1);
+INSERT INTO websites(id, name, category, organization_id)
+VALUES (3, 'instagram','social', 1);
 
--- INSERT INTO websites(id, name, category, organization_id)
--- VALUES (4, 'linkedin','job', 1);
+INSERT INTO websites(id, name, category, organization_id)
+VALUES (4, 'linkedin','job', 1);
 
--- INSERT INTO websites(id, name, category, organization_id)
--- VALUES (5, 'bamboo','job', 1);
-
-
-INSERT INTO websites(id, name, category)
-VALUES (1, 'facebook', 'social');
-
-INSERT INTO websites(id, name, category)
-VALUES (2, 'twitter','social');
-
-INSERT INTO websites(id, name, category)
-VALUES (3, 'instagram','social');
-
-INSERT INTO websites(id, name, category)
-VALUES (4, 'linkedin','job');
-
-INSERT INTO websites(id, name, category)
-VALUES (5, 'bamboo','job');
+INSERT INTO websites(id, name, category, organization_id)
+VALUES (5, 'bamboo','job', 1);
 
 
-INSERT INTO websites(id, name, category)
-VALUES (6, 'netflix', 'entertainment');
+-- INSERT INTO websites(id, name, category)
+-- VALUES (1, 'facebook', 'social');
 
-INSERT INTO websites(id, name, category)
-VALUES (7, 'crave','entertainment');
+-- INSERT INTO websites(id, name, category)
+-- VALUES (2, 'twitter','social');
 
-INSERT INTO websites(id, name, category)
-VALUES (8, 'lighthouse','educational');
+-- INSERT INTO websites(id, name, category)
+-- VALUES (3, 'instagram','social');
 
-INSERT INTO websites(id, name, category)
-VALUES (9, 'alsolighthouse','educational');
+-- INSERT INTO websites(id, name, category)
+-- VALUES (4, 'linkedin','job');
 
-INSERT INTO websites(id, name, category)
-VALUES (10, 'eventbrite','hobby');
+-- INSERT INTO websites(id, name, category)
+-- VALUES (5, 'bamboo','job');
+
+
+-- INSERT INTO websites(id, name, category)
+-- VALUES (6, 'netflix', 'entertainment');
+
+-- INSERT INTO websites(id, name, category)
+-- VALUES (7, 'crave','entertainment');
+
+-- INSERT INTO websites(id, name, category)
+-- VALUES (8, 'lighthouse','educational');
+
+-- INSERT INTO websites(id, name, category)
+-- VALUES (9, 'alsolighthouse','educational');
+
+-- INSERT INTO websites(id, name, category)
+-- VALUES (10, 'eventbrite','hobby');
 
 
 

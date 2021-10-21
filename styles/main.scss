@@ -1,8 +1,14 @@
+@import 'palette';
 body {
+  font-family: $main_font;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: rgb(20, 20, 20);
+  background-color: $background_color;
   padding: 1.5em;
 }
 
+#filter-form {
+  display: flex;
+  flex-direction: row;
+}
