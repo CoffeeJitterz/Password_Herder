@@ -1,15 +1,15 @@
 @import 'palette';
-#login_main {
+#register_main {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: $main_font_color;
-
-  #login_form {
+  #register_form {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    .login_field {
+
+    .register_field {
       padding: .5em;
     }
     .button {
@@ -22,4 +22,3 @@
     }
   }
 }
-

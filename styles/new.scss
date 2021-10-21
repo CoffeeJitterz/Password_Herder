@@ -48,6 +48,15 @@
           color: $icon_hover;
           border: none;
         }
+        #generate {
+          background-color: $nav_item_color;
+          color: $second_font_color;
+          border: none;
+        }
+        #generate:hover {
+          background-color: $nav_item_hover;
+        }
+
       }
     }
   }

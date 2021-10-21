@@ -8,41 +8,39 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <!-- <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
+  <link rel="stylesheet" href="/styles/register.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 
 <body>
   <%- include('partials/_header') %>
-  <!-- <h1>Potato Potato! 🥔</h1> -->
-  <h1>Welcome first time user</h1>
-  <form method="POST" action="/register">
-    <div class="form-organization">
-      <label for="org">Your organization name</label>
-      <input name="organization_name" type="text" class="form-control" id="org_name" placeholder="Enter org name">
-    </div>
+ <main id="register_main">
+   <h1>New In Town?</h1>
+   <form method="POST" action="/register" id="register_form">
+     <div class="register_field">
+       <label for="org">Your organization name</label>
+       <input name="organization_name" type="text" class="form-control" id="org_name" placeholder="Enter org name">
+     </div>
 
-    <div class="form-group">
-      <label for="exampleInputEmail1">Your Email address</label>
-      <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    </div>
+     <div class="register_field">
+       <label for="exampleInputEmail1">Your Email address</label>
+       <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+     </div>
 
-    <div class="form-group">
-      <label for="exampleInputPassword1">Create a Password</label>
-      <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
+     <div class="register_field">
+       <label for="exampleInputPassword1">Create a Password</label>
+       <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+     </div>
 
-    <!-- <div class="form-check">
-      <input name="active" type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div> -->
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+     <!-- <div class="form-check">
+       <input name="active" type="checkbox" class="form-check-input" id="exampleCheck1">
+       <label class="form-check-label" for="exampleCheck1">Check me out</label>
+     </div> -->
+     <input type="submit" class="button" value="Register">
+   </form>
+ </main>
 </body>
 
 </html>

@@ -14,7 +14,7 @@ header {
       background-color: $nav_item_color;
       text-decoration: none;
       font-family: $logo_font;
-      font-size: 2.5em;
+      font-size: 2em;
       padding: .5em;
     }
     .logo:hover {
@@ -39,16 +39,24 @@ header {
     .login:hover {
       background-color: $nav_item_hover;
     }
-    .logout {
-      background-color: $nav_item_color;
-      color: $second_font_color;
-      text-decoration: none;
-      padding: .5em;
-      border: none;
-    }
-    .logout:hover {
-      background-color: $nav_item_hover;
+    #logout_email {
+      display: flex;
+      flex-direction: row;
+      height: 5.5vh;
+      p {
+        margin: 1em;
+      }
+      .logout {
+        background-color: $nav_item_color;
+        color: $second_font_color;
+        text-decoration: none;
+        padding: .5em;
+        border: none;
+      }
+      .logout:hover {
+        background-color: $nav_item_hover;
 
+      }
     }
   }
 }
