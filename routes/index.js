@@ -50,20 +50,8 @@ module.exports = (db) => {
        })
       });
 
-  router.get("/:id/copy", (req, res) => {
-   console.log("I AM COPY");
-   const passwordID = req.params.id;
-   console.log(passwordID);
-   db.query(` SELECT website_password
-              FROM passwords
-              WHERE id = ${passwordID}
-   `)
-   .then(password => {
-     console.log("I'm from THEN!");
-     const copiedPassword = password.rows[0].website_password;
-     console.log(copiedPassword);
-     res.redirect("/");
-   })
+  router.post("/", (req, res) => {
+    //console.log(req.body)
   });
 
   router.post("/:id/delete", (req, res) => {
