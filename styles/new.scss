@@ -32,26 +32,28 @@
           background-color: transparent;
           color: $icon_color;
           border: none;
+          text-shadow: 2px 2px #3d3aff;
         }
         #copy:hover {
-          background-color: transparent;
           color: $icon_hover;
-          border: none;
+          text-shadow: none;
         }
         #save {
           background-color: transparent;
           color: $icon_color;
           border: none;
+          text-shadow: 2px 2px #3d3aff;
         }
         #save:hover {
-          background-color: transparent;
           color: $icon_hover;
-          border: none;
+          text-shadow: none;
+
         }
         #generate {
           background-color: $nav_item_color;
           color: $second_font_color;
           border: none;
+          text-shadow: 1px 1px #3d3aff;
         }
         #generate:hover {
           background-color: $nav_item_hover;

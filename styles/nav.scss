@@ -8,6 +8,7 @@ header {
     align-items: center;
     background: $nav_color;
     padding: 1em;
+    text-shadow: 1px 1px #3d3aff;
 
     .logo {
       color: $second_font_color;
@@ -52,6 +53,7 @@ header {
         text-decoration: none;
         padding: .5em;
         border: none;
+        text-shadow: 1px 1px #3d3aff;
       }
       .logout:hover {
         background-color: $nav_item_hover;

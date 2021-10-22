@@ -1,0 +1,35 @@
+@import 'palette';
+#edit_main {
+  color: $main_font_color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  #edit_form {
+    display: flex;
+    flex-direction: column;
+  .form_item {
+    margin: .5em;
+
+  }
+
+  #save {
+    background-color: $nav_item_color;
+    border: none;
+    color: $second_font_color;
+  }
+  #save:hover {
+    background-color: $nav_item_hover;
+  }
+
+  #copy {
+    background-color: transparent;
+    color: $icon_color;
+    border: none;
+  }
+  #copy:hover {
+    color: $icon_hover;
+    text-shadow: none;
+  }
+
+}
+}

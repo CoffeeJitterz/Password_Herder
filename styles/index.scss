@@ -2,23 +2,21 @@
 #organization {
   background-color: $background_color;
   color: $main_font_color;
-  width: 100vw;
+  width: 90vw;
+  text-shadow: 1px 1px #3d3aff;
 
 
   #organization_tabs {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    background-color: aqua;
-    width: 50vw;
+    margin: 1em;
+    background-color: $nav_item_color;
+    color: $second_font_color;
+    width: 20vw;
   }
   #table_container {
     display: flex;
     flex-direction: row;
     color: $main_font_color;
-    margin: 1.5em;
-    padding: 1.5em;
+    padding: .5em, 1em, .5em, 1em;
     height: 10vh;
 
     #sidebar {
@@ -29,6 +27,7 @@
       .all {
         background-color: $main_font_color;
         border: none;
+        text-shadow: 1px 1px #3d3aff;
       }
       .all:hover {
         background-color: $second_font_color;
@@ -38,6 +37,8 @@
       .job {
         background-color: $job_color;
         border: none;
+        color: white;
+        text-shadow: 2px 2px #3d3aff;
       }
       .job:hover {
         background-color: $job_hover;
@@ -46,6 +47,8 @@
       .social {
         background-color: $social_color;
         border: none;
+        color: white;
+        text-shadow: 2px 2px #3d3aff;
       }
       .social:hover {
         background-color: $social_hover;
@@ -54,6 +57,8 @@
       .educational {
         background-color: $education_color;
         border: none;
+        color: white;
+        text-shadow: 2px 2px #3d3aff;
       }
       .educational:hover {
         background-color: $education_hover;
@@ -62,6 +67,8 @@
       .hobby {
         background-color:$hobby_color;
         border: none;
+        color: white;
+        text-shadow: 2px 2px #3d3aff;
       }
       .hobby:hover {
         background-color: $hobby_hover;
@@ -70,6 +77,8 @@
       .entertainment {
         background-color: $entertainment_color;
         border: none;
+        color: white;
+        text-shadow: 2px 2px #3d3aff;
       }
       .entertainment:hover {
         background-color: $entertainment_hover;
@@ -79,6 +88,7 @@
     table {
       margin: .5em;
       width: 100vw;
+      text-shadow: 2px 2px #3d3aff;
       .job {
         background-color: $job_color;
       }
@@ -113,25 +123,31 @@
         background-color: transparent;
         color: $icon_color;
         border: none;
+        text-shadow: 2px 2px #3d3aff;
       }
       #copy:hover {
-        color: rgb(0, 0, 0);
+        color: $icon_hover;
+        text-shadow: none;
       }
       #edit {
         background-color: transparent;
         color: $icon_color;
         border: none;
+        text-shadow: 2px 2px #3d3aff;
       }
       #edit:hover {
-        color: rgb(0, 0, 0);
+        color: $icon_hover;
+        text-shadow: none;
       }
       #delete {
         background-color: transparent;
         color: $icon_color;
         border: none;
+        text-shadow: 2px 2px #3d3aff;
       }
       #delete:hover {
-        color: rgb(0, 0, 0);
+        color: $icon_hover;
+        text-shadow: none;
       }
     }
   }

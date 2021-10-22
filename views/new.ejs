@@ -20,80 +20,78 @@
   <!-- App JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
 
-    <!--Font Awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
     integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body id="new_body">
   <%- include('partials/_header') %>
-  <main id="main">
-  <h3>PassWord Generator </h3>
-  <section id="section">
-  <div id="check_boxes">
-  <div class="container">
-    <p id="passwordBox"></p>
-  </div>
-  <div>
-    <label for="length">Password Length</label>
-    <input type="number" id="pwdlength" min="8" max="15" value="8">
-  </div>
-  <div>
-    <label for="lowerCase">Include Lowercase</label>
-    <input type="checkbox" name="lowerCase" id="lowerCase">
-  </div>
-  <div>
-    <label for="upperCase"> Include Uppercase</label>
-    <input type="checkbox" name="upperCase" id="upperCase">
-  </div>
-  <div>
-    <label>Include Numbers</label>
-    <input type="checkbox" name="number" id="number">
-  </div>
-  <div>
-    <label>Include Symbols</label>
-    <input type="checkbox" name="symbols" id="symbols">
-  </div>
-  </div>
+    <main id="main">
+      <h3>PassWord Generator </h3>
+      <section id="section">
+        <div id="check_boxes">
+          <div class="container">
+            <p id="passwordBox"></p>
+          </div>
+          <div>
+            <label for="length">Password Length</label>
+            <input type="number" id="pwdlength" min="8" max="15" value="8">
+          </div>
+          <div>
+            <label for="lowerCase">Include Lowercase</label>
+            <input type="checkbox" name="lowerCase" id="lowerCase">
+          </div>
+          <div>
+            <label for="upperCase"> Include Uppercase</label>
+            <input type="checkbox" name="upperCase" id="upperCase">
+          </div>
+          <div>
+            <label>Include Numbers</label>
+            <input type="checkbox" name="number" id="number">
+          </div>
+          <div>
+            <label>Include Symbols</label>
+            <input type="checkbox" name="symbols" id="symbols">
+          </div>
+        </div>
 
-  <form id="form" method="POST" action="/new">
-    <div class="website_field">
-      <label for="website_name">Website</label>
-      <input type="text" name="website_name" id="website_name">
-    </div>
-    <div class="category_field">
-      <label for="website_category">Website Category</label>
-      <select name="website_category" id="website_category">
-        <option disabled selected value> -- select a category -- </option>
-        <option value="social">Social</option>
-        <option value="job">Job</option>
-        <option value="entertainment">Entertainment</option>
-        <option value="educational">Educational</option>
-        <option value="work">Work</option>
-        <option value="hobby">Hobby</option>
-      </select>
-    </div>
-    <div class="username_field">
-      <label for="website_username">User Name</label>
-      <input type="text" name="website_username" id="website_username">
-    </div>
-    <!-- <span class="empty">Please select at least one of the options!!</span> -->
-   <div class="password_field">
-     <label for="passwordBox">Your Password:</label>
-     <input name="text" id="pass-text">
-   </div>
+        <form id="form" method="POST" action="/new">
+          <div class="website_field">
+            <label for="website_name">Website</label>
+            <input type="text" name="website_name" id="website_name">
+          </div>
+          <div class="category_field">
+            <label for="website_category">Website Category</label>
+            <select name="website_category" id="website_category">
+              <option disabled selected value> -- select a category -- </option>
+              <option value="social">social</option>
+              <option value="job">job</option>
+              <option value="entertainment">entertainment</option>
+              <option value="educational">educational</option>
+              <option value="work">work</option>
+              <option value="hobby">hobby</option>
+            </select>
+          </div>
+          <div class="username_field">
+            <label for="website_username">User Name</label>
+            <input type="text" name="website_username" id="website_username">
+          </div>
+          <!-- <span class="empty">Please select at least one of the options!!</span> -->
+          <div class="password_field">
+            <label for="passwordBox">Your Password:</label>
+            <input name="text" id="pass-text">
+          </div>
 
-    <div class="buttons">
-      <input id="generate" type="button" onclick="generatePassword()" value="GENERATE PASSWORD">
-        <button id="copy" name = "copy" id="copy"><i class="fas fa-copy"></i></button>
-        <button id="save" type="submit"><i class="fas fa-save"></i></button>
-    </div>
+          <div class="buttons">
+            <input id="generate" type="button" onclick="generatePassword()" value="GENERATE PASSWORD">
+            <button id="copy" name="copy" id="copy"><i class="fas fa-copy"></i></button>
+            <button id="save" type="submit"><i class="fas fa-save"></i></button>
+          </div>
 
-</form>
-</section>
-</main>
+        </form>
+      </section>
+    </main>
 </body>
-
 </html>
-
