@@ -1,40 +1,35 @@
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
 module.exports = (db) => {
+  //Delete function route
   router.post("/:pw_id", (req, res) => {
-    console.log("I AM DELETE");
-  const passwordID = req.params.id;
-  // console.log(passwordID);
+    const passwordID = req.params.id;
 
-  if (req.session.id === undefined) {
-    res.redirect("login");
+    if (req.session.id === undefined) {
+      res.redirect("login");
     } else {
-      console.log("the user is logged in");
-      db.query (`SELECT user_id FROM passwords
-                WHERE id = ${passwordID};`)
-      .then((result) => {
-        console.log("expecting result", result.rows[0].user_id);
-        // console.log("expecting req.session.id", req.session.id);
-        const tf = (result.rows[0].user_id === req.session.id);
-        console.log("expecting true or false", tf);
+      db.query(
+        `SELECT user_id FROM passwords
+                WHERE id = ${passwordID};`
+      ).then((result) => {
+        const tf = result.rows[0].user_id === req.session.id;
         if (tf) {
-          db
-          .query(` DELETE FROM passwords
+          db.query(
+            ` DELETE FROM passwords
                 WHERE id = ${passwordID}
-                `)
-          .then(() => {
-          res.redirect("/");
-          })
+                `
+          ).then(() => {
+            res.redirect("/");
+          });
         } else {
-          res.send("your are not the creator of this password and you cannot delete this password");
+          res.send(
+            "your are not the creator of this password and you cannot delete this password"
+          );
         }
-      })
+      });
     }
-  })
+  });
 
   return router;
 };
-
-
-

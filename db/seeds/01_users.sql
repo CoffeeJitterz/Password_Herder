@@ -1,7 +1,3 @@
--- Users table seeds here (Example)
--- INSERT INTO users (name) VALUES ('Alice');
--- INSERT INTO users (name) VALUES ('Kira');
-
 --users
 INSERT INTO users (email, user_password) VALUES ('one@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 INSERT INTO users (email, user_password) VALUES ('two@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
@@ -31,9 +27,6 @@ INSERT INTO users_organizations (user_id, organization_id) VALUES (8,2);
 
 
 -- websites
-
-
-
 INSERT INTO websites(name, category)
 VALUES ('facebook', 'social');
 

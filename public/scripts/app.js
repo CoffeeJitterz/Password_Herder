@@ -1,14 +1,4 @@
-// Client facing scripts here
-// $(() => {
-//   $("#copy").click(() => {
-//    const copyPassword = $("#copy_password");
-//     copyPassword.select();
-//      /* Copy the text inside the text field */
-//     navigator.clipboard.writeText(copyPassword.value);
-//     /* Alert the copied text */
-//     alert("Copied the text: " + copyPassword.value);
-//   })
-// });
+//generate password
 function generatePassword() {
   let password = "";
   let characters = "";
@@ -35,7 +25,6 @@ function generatePassword() {
     characters = characters + symbol;
   }
   for (let i = 0; i < passwordLength; i++) {
-    //generatePassword
     createPassword = characters.charAt(Math.floor(Math.random() * characters.length));
     password += createPassword;
   }
@@ -49,16 +38,7 @@ function generatePassword() {
   //  return password;
 };
 
-// Copy password button
-// function copy() {
-//   // get password from input text field
-//   let copyText = document.getElementById('pass-text').value;
-//   console.log("copyText:", copyText);
-//   //Copy the text from the text field
-//   navigator.clipboard.writeText(copyText);
-// };
-
-
+//copy password
 $(document).ready(function() {
   $('#copy').click(function () {
     navigator.clipboard.writeText($("#pass-text").val());
